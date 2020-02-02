@@ -1,6 +1,8 @@
 import React from 'react';
 import logo from './splash_logo.png';
 import './App.css';
+import './animate.css';
+import RandomAnimations from './components/RandomAnimations.js';
 
 
 
@@ -19,8 +21,11 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         ></a>
+        <img src={logo} className="logo" alt="logo" />
+        <p>hmmm</p>
+        
         */}
-      <img src={logo} className="logo" alt="logo" />
+      <RandomAnimations />
       </header>
     </div>
   );

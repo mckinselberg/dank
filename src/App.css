@@ -36,3 +36,14 @@
     transform: rotate(360deg);
   }
 }
+
+.splash {
+	max-width:100%;
+	width:422px;
+	height:110px;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:150px;
+	background-image:url(./splash_logo.png);
+	z-index:1;
+}
