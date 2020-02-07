@@ -61,7 +61,19 @@ export default class RandomAnimations extends Component {
   }
   render() {
     return (
-      <div className={`splash animated ${this.state.randomAnimation}`}></div>
+      <div>
+        <div className={`splash animated ${this.state.randomAnimation}`}></div>
+        <div className={`experience animated  ${this.state.randomAnimation}`} >
+          {/*<ul>
+            <li>http://irwinleighton.com</li>
+            <li>https://vintnersalliance.com/</li>
+            <li>https://vintageepicure.com/</li>
+            <li>https://chista.net/</li>
+          </ul>*/}
+          <h1>I am a freelance web developer,<br/>currently seeking a full-time position.</h1>
+	        <p>These are a few of the websites<br/>I've had the pleasure of working on:</p>
+        </div>
+      </div>
     );
   }
 }
