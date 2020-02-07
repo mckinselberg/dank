@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from './splash_logo.png';
+//import logo from './splash_logo.png';
 import './App.css';
 import './animate.css';
 import RandomAnimations from './components/RandomAnimations.js';

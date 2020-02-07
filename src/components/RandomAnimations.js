@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import logo from '../splash_logo.png';
+//import logo from '../splash_logo.png';
 import { sample } from 'lodash';
-import _ from 'lodash';
+//import _ from 'lodash';
  
 export default class RandomAnimations extends Component {
   constructor(props) {
@@ -52,22 +52,22 @@ export default class RandomAnimations extends Component {
         'slideInRight',
         'slideInUp'],
       randomAnimation:null,
-      animated:false
+      //animated:false
     }
   }
 
   componentDidMount() {
     setTimeout(()=> {
       this.setState({
-        randomAnimation:_.sample(this.state.animations),
-        animated:true
+        randomAnimation:sample(this.state.animations),
+        //animated:true
       })
     },1000)
   }
 
   render() {
     return (
-            <div className={`splash animated ${this.state.animated ? 'animated' : ''} ${this.state.randomAnimation}`}></div>
+            <div className={`splash animated ${this.state.randomAnimation}`}></div>
     );
   }
 }
