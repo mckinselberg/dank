@@ -67,7 +67,7 @@ export default class RandomAnimations extends Component {
 
   render() {
     return (
-            <div className={`splash ${this.state.animated ? 'animated' : ''} ${this.state.randomAnimation}`}></div>
+            <div className={`splash animated ${this.state.animated ? 'animated' : ''} ${this.state.randomAnimation}`}></div>
     );
   }
 }
