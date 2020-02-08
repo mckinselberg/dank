@@ -53,23 +53,25 @@ export default class RandomAnimations extends Component {
       randomAnimation1:null,
       randomAnimation2:null
     }
+    this.randomAnimation1 = sample(this.state.animations);
+    this.randomAnimation2 = sample(this.state.animations);
   }
   componentDidMount() {
-    setTimeout(()=> {
-      this.setState({
-        randomAnimation1:sample(this.state.animations),
-        randomAnimation2:sample(this.state.animations)
-      })
-    },1000)
+    //setTimeout(()=> {
+      //this.setState({
+        //randomAnimation1:sample(this.state.animations),
+        //randomAnimation2:sample(this.state.animations)
+      //})
+    //},1000)
   }
   render() {
     return (
       <div>
-        <div className={`splash animated ${this.state.randomAnimation1}`}>
+        <div className={`splash animated ${this.randomAnimation1}`}>
           <img src={splashlogo} alt={`Dan Kinsley Web Developer Logo`}/>
           {console.log(splashlogo.clientHeight)}
         </div>
-        <div className={`experience animated  ${this.state.randomAnimation2}`} >
+        <div className={`experience animated  ${this.randomAnimation2}`} >
           {/*<ul>
             <li>http://irwinleighton.com</li>
             <li>https://vintnersalliance.com/</li>
