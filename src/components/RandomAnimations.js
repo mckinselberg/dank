@@ -39,7 +39,7 @@ export default class RandomAnimations extends Component {
         'rotateInDownRight',
         'rotateInUpLeft',
         'rotateInUpRight',
-        'hinge',
+        //'hinge',
         'rollIn',
         'zoomIn',
         'zoomInDown',
@@ -67,8 +67,8 @@ export default class RandomAnimations extends Component {
   render() {
     return (
       <div>
-        <div className={`splash animated ${this.randomAnimation1}`}>
-          <img src={splashlogo} alt={`Dan Kinsley Web Developer Logo`}/>
+        <div className={`splash`}>
+          <img className={`animated ${this.randomAnimation1}`} src={splashlogo} alt={`Dan Kinsley Web Developer Logo`}/>
           {console.log(splashlogo.clientHeight)}
         </div>
         <div className={`experience animated  ${this.randomAnimation2}`} >
