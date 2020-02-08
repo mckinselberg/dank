@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { sample } from 'lodash';
+import splashlogo from '../img/splash_logo.png';
  
 export default class RandomAnimations extends Component {
   constructor(props) {
@@ -62,7 +63,10 @@ export default class RandomAnimations extends Component {
   render() {
     return (
       <div>
-        <div className={`splash animated ${this.state.randomAnimation}`}></div>
+        <div className={`splash animated ${this.state.randomAnimation}`}>
+          <img src={splashlogo} alt={`Dan Kinsley Web Developer Logo`}/>
+          {console.log(splashlogo.clientHeight)}
+        </div>
         <div className={`experience animated  ${this.state.randomAnimation}`} >
           {/*<ul>
             <li>http://irwinleighton.com</li>
@@ -70,8 +74,12 @@ export default class RandomAnimations extends Component {
             <li>https://vintageepicure.com/</li>
             <li>https://chista.net/</li>
           </ul>*/}
-          <h1>I am a freelance web developer,<br/>currently seeking a full-time position.</h1>
-	        <p>These are a few of the websites<br/>I've had the pleasure of working on:</p>
+          <h1>Front-End Developer,<br/>currently seeking a <br/>contract or full-time position.</h1>
+          {/*<h2>Current Job Skillset</h2>
+          <p>HTML5, XML, CSS, SCSS, javaScript, ReactJS, NPM, webpack, gulp </p>
+          <h2>Skills and Experience</h2>
+          <p></p>
+	        <p></p>*/}
         </div>
       </div>
     );
