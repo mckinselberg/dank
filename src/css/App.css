@@ -21,7 +21,7 @@ body {
 @media screen and (max-width: 480px) {
   .splash  {
     height:auto;
-    transform:rotate(-45deg);
+    /*transform:rotate(-45deg);*/
     max-height:40%;
     top:0px;
     transition:1s all;
