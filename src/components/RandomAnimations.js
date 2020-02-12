@@ -54,7 +54,7 @@ export default class RandomAnimations extends Component {
       randomAnimation2:null
     }
     this.randomAnimation1 = sample(this.state.animations);
-    this.randomAnimation2 = sample(this.state.animations);
+    //this.randomAnimation2 = sample(this.state.animations);
   }
   componentDidMount() {
     //setTimeout(()=> {
@@ -70,8 +70,7 @@ export default class RandomAnimations extends Component {
         <div className={`splash`}>
           <img className={`animated ${this.randomAnimation1}`} src={splashlogo} alt={`Dan Kinsley Web Developer Logo`}/>
           {console.log(splashlogo.clientHeight)}
-        </div>
-        <div className={`experience animated  ${this.randomAnimation2}`} >
+          <div className={`experience animated  ${this.randomAnimation1}`} >
           {/*<ul>
             <li>http://irwinleighton.com</li>
             <li>https://vintnersalliance.com/</li>
@@ -85,6 +84,8 @@ export default class RandomAnimations extends Component {
           <p></p>
 	        <p></p>*/}
         </div>
+        </div>
+        
       </div>
     );
   }
