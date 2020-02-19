@@ -3,10 +3,10 @@ import React, {Component} from 'react';
 import './css/Portfolio.css';
 import './css/animate.css';
 import RandomAnimations from './components/RandomAnimations.js';
-import Mastermind from './components/Mastermind/Game.js';
-import Advice from './components/Advice/App';
-import PortfolioItem from './components/PortfolioItem.js';
-
+//import Mastermind from './components/Mastermind/Game.js';
+//import Advice from './components/Advice/App';
+//import PortfolioItem from './components/PortfolioItem.js';
+import Link from './components/Link.js';
 
 
 export default class App extends Component{
@@ -14,37 +14,23 @@ export default class App extends Component{
     super(props)
     this.state = {
       splash:'shown',
-      mastermind:'hidden',
+      mm:'hidden',
       advice:'hidden',
       ab:'hidden'
     }
-    this.setMastermindVisibility = this.setMastermindVisibility.bind(this);
-    this.setAdviceVisibility = this.setAdviceVisibility.bind(this);
+    this.setMMVisibility = this.setMMVisibility.bind(this);
     this.setABVisibility = this.setABVisibility.bind(this);
-    this.visibility = ['hidden','shown']
+    this.visibility = ['hidden','shown'];
   }
 
-  setMastermindVisibility() {
-    if (this.state.mastermind === this.visibility[1]) {
+  setMMVisibility() {
+    if (this.state.mm === this.visibility[1]) {
       this.setState({
-        mastermind:this.visibility[0]
+        mm:this.visibility[0]
       });
     } else {
       this.setState({
-        mastermind:this.visibility[1]
-      });
-
-    }
-  }
-
-  setAdviceVisibility() {
-    if (this.state.advice === this.visibility[1]) {
-      this.setState({
-        advice:this.visibility[0]
-      });
-    } else {
-      this.setState({
-        advice:this.visibility[1]
+        mm:this.visibility[1]
       });
 
     }
@@ -69,21 +55,26 @@ export default class App extends Component{
         <div className={`Splash ${this.state.splash}`}>
             <RandomAnimations />
         </div>
+        {/*
         <div className={'buttons'}>
-          <button onClick={this.setABVisibility} className={this.state.ab === this.visibility[1] ? `active` : ``}>ab</button>
-          <button onClick={this.setMastermindVisibility} className={this.state.mastermind === this.visibility[1] ? `active` : ``}>Mastermind</button>
-          <button onClick={this.setAdviceVisibility} className={this.state.advice === this.visibility[1] ? `active` : ``}>Advice</button>
+          <button onClick={this.setABVisibility} className={this.state.ab === this.visibility[1] ? `active` : ``}>AllianceBernstein</button>
+          <button onClick={this.setMMVisibility} className={this.state.mm === this.visibility[1] ? `active` : ``}>Mutant Media</button>
+          <button onClick={this.setChistaVisibility} className={this.state.chista === this.visibility[1] ? `active` : ``}>Chista</button>
         </div>
         <div className={`Portfolio`}>
-          <div className={`AB ${this.state.ab} portfolio-item `}>
-            <PortfolioItem name="ab"/>
-          </div>
-          <div className={`Mastermind ${this.state.mastermind} portfolio-item`}>
-            <Mastermind />
-          </div>
-          <div className={`Advice ${this.state.advice} portfolio-item`}>
-            <Advice />
-          </div>
+          <PortfolioItem class={`AB ${this.state.ab} `} name="ab" url="https://www.alliancebernstein.com/investments/us/home.htm"/>
+          <PortfolioItem class={`MM ${this.state.mm} `} name="mm" url="https://web.archive.org/web/20190714155011/https://mutantmedia.com/interactive/"/>
+        </div>
+        */}
+        <div className="experience">
+          <ul>
+            <Link name="Resume" url="/dan-kinsley-resume.pdf"/>
+            <Link name="AllianceBernstein" url="https://www.alliancebernstein.com/investments/us/home.htm"/>
+            <Link name="Vintage Epicure" url="https://vintageepicure.com/"/>
+            <Link name="Mutant Media (Archive)" url="https://web.archive.org/web/20190714155011/https://mutantmedia.com/interactive/"/>
+            <Link name="Irwin Leighton" url="https://irwinleighton.com/"/>
+          </ul>
+
         </div>
       </div>
     );

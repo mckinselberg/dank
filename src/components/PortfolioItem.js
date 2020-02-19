@@ -13,8 +13,8 @@ export default class PortfolioItem extends Component {
 
     render() {
         return(
-            <div className="portfolio-item">
-              {this.props.name}
+            <div className={`portfolio-item ${this.props.class}`}>
+              <iframe scrolling="no" frameBorder="0" src={this.props.url}></iframe>
             </div>
         );
     }
