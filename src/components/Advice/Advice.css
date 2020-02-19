@@ -1,0 +1,7 @@
+.advice-container {
+  width:100%;
+  display:inline-block;
+}
+.advice-container * {
+  text-align: center;
+}

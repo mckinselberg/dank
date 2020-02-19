@@ -1,4 +1,6 @@
-
+* {
+  transition: all 1s;
+}
 body {
   padding:2px;
   overflow:none;
@@ -10,7 +12,7 @@ body {
 	height:25%;
 	margin-left:auto;
 	margin-right:auto;
-	margin-top:20%;
+	margin-top:5%;
   background-size:cover;
   max-width:100%;
 	z-index:1;
@@ -38,6 +40,7 @@ body {
 }
 
 .experience {
+  margin-bottom:5%;
   text-align: center;
   padding:0%;
 }
@@ -67,4 +70,44 @@ body {
 }
 .experience ul li a:hover {
 	color:#000;
+}
+
+
+
+.visible {
+
+}
+.hidden {
+  visibility: hidden;
+}
+
+
+.buttons {
+  display:flex;
+  background-color:#324C7E;
+  padding:2px;
+  margin-bottom:20px;
+  justify-content: center;
+}
+.buttons button {
+  background:none;
+  border:none;
+  flex-basis:1
+}
+.buttons button:hover {
+  border:none;
+}
+.buttons .active {
+  background:#fff;
+  color:#324C7E;
+}
+
+.Portfolio {
+  display:flex;
+  
+}
+.portfolio-item {
+  flex-grow: 1;
+  width:33%;
+  flex-basis:33%;
 }
