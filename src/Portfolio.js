@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import './css/Portfolio.css';
 import './css/animate.css';
 import RandomAnimations from './components/RandomAnimations.js';
+import { sample } from 'lodash';
 //import Mastermind from './components/Mastermind/Game.js';
 //import Advice from './components/Advice/App';
 //import PortfolioItem from './components/PortfolioItem.js';
@@ -14,36 +15,68 @@ export default class App extends Component{
     super(props)
     this.state = {
       splash:'shown',
-      mm:'hidden',
       advice:'hidden',
-      ab:'hidden'
+      mastermind:'hidden',
+      animations:[
+          'bounce',
+          'flash',
+          'pulse',
+          'rubberBand',
+          'shake',
+          'headShake',
+          'swing',
+          'tada',
+          'wobble',
+          'jello',
+          'bounceIn',
+          'bounceInDown',
+          'bounceInLeft',
+          'bounceInRight',
+          'bounceInUp',
+          'fadeIn',
+          'fadeInDown',
+          'fadeInDownBig',
+          'fadeInLeft',
+          'fadeInLeftBig',
+          'fadeInRight',
+          'fadeInRightBig',
+          'fadeInUp',
+          'fadeInUpBig',
+          'flipInX',
+          'flipInY',
+          'lightSpeedIn',
+          'rotateIn',
+          'rotateInDownLeft',
+          'rotateInDownRight',
+          'rotateInUpLeft',
+          'rotateInUpRight',
+          //'hinge',
+          'rollIn',
+          'zoomIn',
+          'zoomInDown',
+          'zoomInLeft',
+          'zoomInRight',
+          'zoomInUp',
+          'slideInDown',
+          'slideInLeft',
+          'slideInRight',
+        'slideInUp'],
     }
-    this.setMMVisibility = this.setMMVisibility.bind(this);
-    this.setABVisibility = this.setABVisibility.bind(this);
+    this.randomAnimation = sample(this.state.animations);
+    alert(this.randomAnimation);
+    this.setVisibility = this.setVisibility.bind(this);
     this.visibility = ['hidden','shown'];
   }
 
-  setMMVisibility() {
-    if (this.state.mm === this.visibility[1]) {
+  setVisibility(e) {
+    let target = e.target.value.toLowerCase();
+    if (this.state[target] === this.visibility[1]) {
       this.setState({
-        mm:this.visibility[0]
+        [target]:this.visibility[0]
       });
     } else {
       this.setState({
-        mm:this.visibility[1]
-      });
-
-    }
-  }
-
-  setABVisibility() {
-    if (this.state.ab === this.visibility[1]) {
-      this.setState({
-        ab:this.visibility[0]
-      });
-    } else {
-      this.setState({
-        ab:this.visibility[1]
+        [target]:this.visibility[1]
       });
 
     }
@@ -55,26 +88,38 @@ export default class App extends Component{
         <div className={`Splash ${this.state.splash}`}>
             <RandomAnimations />
         </div>
-        {/*
-        <div className={'buttons'}>
-          <button onClick={this.setABVisibility} className={this.state.ab === this.visibility[1] ? `active` : ``}>AllianceBernstein</button>
-          <button onClick={this.setMMVisibility} className={this.state.mm === this.visibility[1] ? `active` : ``}>Mutant Media</button>
-          <button onClick={this.setChistaVisibility} className={this.state.chista === this.visibility[1] ? `active` : ``}>Chista</button>
-        </div>
-        <div className={`Portfolio`}>
-          <PortfolioItem class={`AB ${this.state.ab} `} name="ab" url="https://www.alliancebernstein.com/investments/us/home.htm"/>
-          <PortfolioItem class={`MM ${this.state.mm} `} name="mm" url="https://web.archive.org/web/20190714155011/https://mutantmedia.com/interactive/"/>
-        </div>
-        */}
-        <div className="experience">
+        <div className={`experience animated ${this.randomAnimation}`}>
           <ul>
-            <Link name="Resume" url="/dan-kinsley-resume.pdf"/>
-            <Link name="AllianceBernstein" url="https://www.alliancebernstein.com/investments/us/home.htm"/>
+            <Link name="AllianceBernstein/a" url="https://www.alliancebernstein.com/investments/us/retirement/lifetime-income-strategy/home.htm"/>
+            <Link name="AllianceBernstein/b" url="https://www.alliancebernstein.com/investments/us/retirement/ira/home.htm"/>
             <Link name="Vintage Epicure" url="https://vintageepicure.com/"/>
             <Link name="Mutant Media (Archive)" url="https://web.archive.org/web/20190714155011/https://mutantmedia.com/interactive/"/>
             <Link name="Irwin Leighton" url="https://irwinleighton.com/"/>
           </ul>
-
+          <br/>
+          <br/>
+          <br/>
+          <h2>Current Job Skillset</h2>
+          <p>HTML5, XML, CSS3, SCSS,<br/>JavaScript, React, Git</p>
+          <ul>
+            <Link name="Resume" url="/dan-kinsley-resume.pdf"/>
+          </ul>
+          
+          {/*}
+          <div className={'buttons'}>
+            <button onClick={this.setVisibility} className={this.state.mastermind === this.visibility[1] ? `active` : ``} value="mastermind">Mastermind</button>
+            <p>{`< Some Apps I've created >`}</p>
+            <button onClick={this.setVisibility} className={this.state.advice === this.visibility[1] ? `active` : ``} value="advice">Advice</button>
+          </div>
+          <div className={`Portfolio`}>
+            <div className={`portfolio-item ${this.state.mastermind === this.visibility[1] ? `shown` : `hidden`}`}>
+              <Mastermind/>
+            </div>
+            <div className={`portfolio-item ${this.state.advice === this.visibility[1] ? `shown` : `hidden`}`}>
+              <Advice/>
+            </div>
+          </div>
+          */}
         </div>
       </div>
     );

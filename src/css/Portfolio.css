@@ -50,8 +50,7 @@ body {
 }
 .experience ul li a {
 	color:#324C7E;
-  transition:.5s all;
-  text-decoration: none;
+	transition:.5s all;
 }
 .experience ul li a:hover {
 	color:#000;
@@ -87,20 +86,14 @@ body {
   color:#324C7E;
 }
 
-/*
 .Portfolio {
   display:flex;
   
 }
 .portfolio-item {
   flex-grow: 1;
-  width:33%;
-  flex-basis:33%;
-}
-*/
-iframe {
-  width:100%;
-  height:100%;
+  width:50%;
+  flex-basis:50%;
 }
 
 
