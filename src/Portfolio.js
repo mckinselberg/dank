@@ -99,7 +99,7 @@ export default class App extends Component{
           <br/>
           <br/>
           <h2>Current Job Skillset</h2>
-          <p>HTML5, XML, CSS3, SCSS,<br/>JavaScript, React, Git</p>
+          <p>HTML5, XML, CSS3, SCSS,<br/>JavaScript, React, Git Bash</p>
           <ul>
             <Link name="Resume" url="/dan-kinsley-resume.pdf"/>
           </ul>
