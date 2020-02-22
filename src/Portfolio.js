@@ -63,7 +63,6 @@ export default class App extends Component{
         'slideInUp'],
     }
     this.randomAnimation = sample(this.state.animations);
-    alert(this.randomAnimation);
     this.setVisibility = this.setVisibility.bind(this);
     this.visibility = ['hidden','shown'];
   }
