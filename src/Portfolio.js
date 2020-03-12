@@ -89,11 +89,15 @@ export default class App extends Component{
         </div>
         <div className={`experience animated ${this.randomAnimation}`}>
           <ul>
-            <Link name="AllianceBernstein/a" url="https://www.alliancebernstein.com/investments/us/retirement/lifetime-income-strategy/home.htm"/>
-            <Link name="AllianceBernstein/b" url="https://www.alliancebernstein.com/investments/us/retirement/ira/home.htm"/>
-            <Link name="Vintage Epicure" url="https://vintageepicure.com/"/>
+            <Link name="AllianceBernstein/a" url="https://www.alliancebernstein.com/sites/campaign/theme/tech-and-innovation.htm"/>
+            <Link name="AllianceBernstein/b" url="https://www.alliancebernstein.com/investments/us/retirement/collective-investment-trusts/home.htm"/>
+            <Link name="AllianceBernstein/c" url="https://www.alliancebernstein.com/investments/us/retirement/lifetime-income-strategy/home.htm"/>
+            {/*<Link name="AllianceBernstein/d" url="https://www.alliancebernstein.com/investments/us/retirement/ira/home.htm"/>*/}
             {/*<Link name="Mutant Media (Archive)" url="https://web.archive.org/web/20190714155011/https://mutantmedia.com/interactive/"/>*/}
             <Link name="Irwin Leighton" url="https://irwinleighton.com/"/>
+            <Link name="LPW Training Services" url="https://lpwtraining.com/"/>
+            <Link name="Vintage Epicure" url="https://vintageepicure.com/"/>
+            <Link name="Chista" url="https://www.chista.net"/>
           </ul>
           <br/>
           <br/>
