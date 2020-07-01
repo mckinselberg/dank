@@ -56,16 +56,18 @@ export default class RandomAnimations extends Component {
     this.randomAnimation1 = sample(this.state.animations);
   }
   componentDidMount() {
+    console.log('Welcome to my website, created with React. I can also write code in PHP, etc...');
+    console.log('Thanks for checking out my website.');
+    
   }
   render() {
     return (
       <div>
         <div className={`splash`}>
           <img className={`animated ${this.randomAnimation1}`} src={splashlogo} alt={`Dan Kinsley Web Developer Logo`}/>
-          {console.log(splashlogo.clientHeight)}
           <div className={`experience animated  ${this.randomAnimation1}`} >
-          <h1>Front-End Developer,<br/>currently seeking a <br/>contract or full-time position.</h1>
-        </div>
+            <h1>Front-End Developer,<br/>currently seeking a <br/>contract or full-time position. Get ahold of me. </h1>
+          </div>
         </div>
         
       </div>
