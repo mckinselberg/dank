@@ -121,6 +121,7 @@ body {
   position:fixed;
   left:0;
   top:0;
+  background-color:#fff;
 }
 #nav a { 
   color: #324C7E;
@@ -138,4 +139,6 @@ body {
 .quotes #quotes {
   height:100%;
   text-align: center;
+  padding:0 30% 0 30%;
+  word-break: break-all;
 }
