@@ -139,6 +139,6 @@ body {
 .quotes #quotes {
   height:100%;
   text-align: center;
-  padding:0 30% 0 30%;
-  word-break: break-all;
+  padding:0 24% 0 24%;
+  word-break: break-word;
 }
