@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Portfolio from './Portfolio';
+import Portfolio from './components/Portfolio';
 import Mastermind from './components/Mastermind/Game';
 import Quotes from './components/Quotes/QuotesComponent';
 import qs from './utilities/qs';

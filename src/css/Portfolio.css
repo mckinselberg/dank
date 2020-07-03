@@ -24,7 +24,7 @@ body {
   transition:1s all;
 }
 .experience {
-  margin-bottom:5%;
+  margin-bottom:1%;
   text-align: center;
   padding:0%;
 }
@@ -37,6 +37,9 @@ body {
 	font-size:1rem;
 	margin:0 auto 10px auto;
 	color:#324C7E;
+}
+.experience p {
+  margin:0;
 }
 .experience ul {
 	text-align: center;
@@ -108,7 +111,10 @@ body {
     /*transform:rotate(90deg);*/
     transition:1s all;
     font-size:.75rem;
-
+    margin-top:20%;
+  }
+  .splash img {
+    max-width:75%;
   }
   .experience h1 {
     font-size:1rem;

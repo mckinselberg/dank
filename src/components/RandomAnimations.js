@@ -54,11 +54,15 @@ export default class RandomAnimations extends Component {
       randomAnimation2:null
     }
     this.randomAnimation1 = sample(this.state.animations);
+    this.addDecoration = this.addDecoration.bind(this);
   }
   componentDidMount() {
     console.log('Welcome to my website, created with React. I can also write code in PHP, etc...');
     console.log('Thanks for checking out my website.');
     
+  }
+  addDecoration() {
+    return <p style={{textAlign:"center",padding:0,margin:0,fontSize:'2em',color:'#324C7E'}}>.</p>;
   }
   render() {
     return (
@@ -66,7 +70,8 @@ export default class RandomAnimations extends Component {
         <div className={`splash`}>
           <img className={`animated ${this.randomAnimation1}`} src={splashlogo} alt={`Dan Kinsley Web Developer Logo`}/>
           <div className={`experience animated  ${this.randomAnimation1}`} >
-            <h1>Front-End Developer,<br/>currently seeking a <br/>contract or full-time position. Get ahold of me. </h1>
+            {this.addDecoration()}
+            <h1>Front-End Developer,<br/>currently seeking<br/> a contract or<br/> full-time position.<br/> Get ahold of me. </h1>
           </div>
         </div>
         

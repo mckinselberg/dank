@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 //import logo from './splash_logo.png';
-import './css/Portfolio.css';
-import './css/animate.css';
-import RandomAnimations from './components/RandomAnimations.js';
+import '../css/Portfolio.css';
+import '../css/animate.css';
+import RandomAnimations from './RandomAnimations.js';
 import { sample } from 'lodash';
 //import Mastermind from './components/Mastermind/Game.js';
 //import Advice from './components/Advice/App';
 //import PortfolioItem from './components/PortfolioItem.js';
-import Link from './components/Link.js';
+import Link from './Link.js';
 
 
 export default class App extends Component{
@@ -65,6 +65,7 @@ export default class App extends Component{
     this.randomAnimation = sample(this.state.animations);
     this.setVisibility = this.setVisibility.bind(this);
     this.visibility = ['hidden','shown'];
+    this.addDecoration = this.addDecoration.bind(this);
   }
 
   setVisibility(e) {
@@ -80,6 +81,9 @@ export default class App extends Component{
 
     }
   }
+  addDecoration() {
+    return <p style={{textAlign:"center",padding:0,margin:0,fontSize:'2em',color:'#324C7E'}}>.</p>;
+  }
 
   render() {
     return (
@@ -88,6 +92,12 @@ export default class App extends Component{
             <RandomAnimations />
         </div>
         <div className={`experience animated ${this.randomAnimation}`}>
+          {this.addDecoration()}
+          <h2>Current Job Skillset</h2>
+          <p>HTML5, XML, CSS3, SCSS,<br/>ES6+, React, Git, webpack</p>
+          <br/>
+          {this.addDecoration()}
+          <h2>Work Experience</h2>
           <ul>
             <Link name="AllianceBernstein/a" url="https://www.alliancebernstein.com/sites/campaign/theme/tech-and-innovation.htm?Seg=56"/>
             <Link name="AllianceBernstein/b" url="https://www.alliancebernstein.com/investments/us/retirement/collective-investment-trusts/home.htm"/>
@@ -100,11 +110,8 @@ export default class App extends Component{
             <Link name="Chista" url="https://www.chista.net"/>
           </ul>
           <br/>
-          <br/>
-          <br/>
-          <h2>Current Job Skillset</h2>
-          <p>HTML5, XML, CSS3, SCSS,<br/>JavaScript, React, Git Bash</p>
           <ul>
+            {this.addDecoration()}
             <Link name="Resumé" url="/dan-kinsley-resume.pdf"/>
             {/*<Link name="Github" url="https://github.com/mckinselberg"/>*/}
           </ul>
