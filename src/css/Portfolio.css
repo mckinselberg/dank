@@ -5,14 +5,14 @@ body {
   padding:2px;
   overflow:hidden;
   overflow-x:hidden;
-  overflow-y:hidden;
+  height:100%;
 }
 .splash {
 	max-width:100%;
 	height:25%;
 	margin-left:auto;
 	margin-right:auto;
-	margin-top:5%;
+	margin-top:10%;
   background-size:cover;
   max-width:100%;
 	z-index:1;
@@ -113,4 +113,28 @@ body {
   .experience h1 {
     font-size:1rem;
   }
+}
+
+/* New Stuff */
+#nav {
+  padding:2%;
+  position:fixed;
+  left:0;
+  top:0;
+}
+#nav a { 
+  color: #324C7E;
+  text-decoration: none;;
+}
+#nav a:hover {
+  padding:1px;
+  color:white;
+  background-color:#324C7E;
+}
+
+.quotes {  
+  overflow-y:scroll;
+}
+.quotes #quotes {
+  height:100%;
 }
