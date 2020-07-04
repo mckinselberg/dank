@@ -18,6 +18,13 @@ body {
 	z-index:1;
   text-align: center;
 }
+
+@media screen and (min-width: 500px) {
+  .splash {
+    margin-top:5%;
+  }
+}
+
 .splash img {
   max-width:100%;
   width:auto;
