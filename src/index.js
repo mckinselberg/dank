@@ -4,6 +4,7 @@ import './index.css';
 import Portfolio from './components/Portfolio';
 import Mastermind from './components/Mastermind/Game';
 import Quotes from './components/Quotes/QuotesComponent';
+//import Tetris from './components/Tetris/Tetris';
 import qs from './utilities/qs';
 import * as serviceWorker from './serviceWorker';
 
@@ -32,10 +33,15 @@ switch(qs.p) {
     ReactDOM.render(<Quotes />, document.getElementById('quotes'));
     document.body.classList.add('quotes');
     break;
+  case 'tetris': 
+    document.body.appendChild(buildDiv('tetris', 'tetris'));
+    ReactDOM.render(<Tetris />, document.getElementById('tetris'));
+    document.body.classList.add('tetris');
+    break;
   default: 
     document.body.appendChild(buildDiv('portfolio', 'portfolio'));
     ReactDOM.render(<Portfolio />, document.getElementById('portfolio')); 
-    document.body.classList.add('remove');
+    document.body.classList.add('portfolio');
     break;
 }
 
