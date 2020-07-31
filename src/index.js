@@ -55,6 +55,8 @@ switch(qs.p) {
     break;
 }
 
+document.getElementsByTagName('body').classList.add('bodyLoaded')
+
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

@@ -172,3 +172,7 @@ body.tetris {
 body.tetris canvas {
   border: solid .1em white;
 }
+
+.bodyLoaded {
+  overflow-y: scroll;
+}
