@@ -4,15 +4,23 @@ import './index.css';
 import Portfolio from './components/Portfolio';
 import Mastermind from './components/Mastermind/Game';
 import Quotes from './components/Quotes/QuotesComponent';
-//import Tetris from './components/Tetris/Tetris';
+import Tetris from './components/Tetris/Tetris';
 import qs from './utilities/qs';
 import * as serviceWorker from './serviceWorker';
 
 
-let buildDiv = (id, component) => {
+const buildDiv = (id, component) => {
   let div = document.createElement('div');
   div.setAttribute('id', component);
   return div;
+}
+
+const buildCanv = (id, component, w, h) => {
+  let canv = document.createElement('canvas');
+  canv.setAttribute('id', component);
+  canv.setAttribute('width', w);
+  canv.setAttribute('height', h);
+  return canv;
 }
 
 
@@ -34,8 +42,10 @@ switch(qs.p) {
     document.body.classList.add('quotes');
     break;
   case 'tetris': 
-    document.body.appendChild(buildDiv('tetris', 'tetris'));
-    ReactDOM.render(<Tetris />, document.getElementById('tetris'));
+    document.body.appendChild(buildDiv('score', 'score'));
+    document.body.appendChild(buildCanv('tetris', 'tetris', 240, 400));
+    //ReactDOM.render(<Tetris />, document.getElementById('tetris'));
+    Tetris();
     document.body.classList.add('tetris');
     break;
   default: 
