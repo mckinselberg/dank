@@ -57,8 +57,8 @@ export default class RandomAnimations extends Component {
     this.addDecoration = this.addDecoration.bind(this);
   }
   componentDidMount() {
-    console.log('Welcome to my website, created with React. I can also write code in PHP, etc...');
-    console.log('Thanks for checking out my website.');
+    console.log('Welcome to my website, created with Create React App. I can also write code in PHP, etc...');
+    console.log(`Lately, I've been using my own brew of webpack, babel, and react.`);
     
   }
   addDecoration() {

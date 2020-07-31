@@ -8,6 +8,8 @@ import Tetris from './components/Tetris/Tetris';
 import qs from './utilities/qs';
 import * as serviceWorker from './serviceWorker';
 
+const origTitle = document.title;
+
 
 const buildDiv = (id, component) => {
   let div = document.createElement('div');
@@ -31,7 +33,8 @@ switch(qs.p) {
     ReactDOM.render(<Portfolio />, document.getElementById('portfolio'));
     break;
   */
-  case 'mastermind': 
+  case 'mastermind':
+    document.title = 'Mastermind. The classic game, made with React.';
     document.body.appendChild(buildDiv('mastermind', 'mastermind'));
     ReactDOM.render(<Mastermind />, document.getElementById('mastermind'));
     document.body.classList.add('remove');
@@ -42,15 +45,16 @@ switch(qs.p) {
     document.body.classList.add('quotes');
     break;
   case 'tetris': 
+    document.title = 'Tetris, from a tutorial by https://github.com/javascriptteacher';
     document.body.appendChild(buildDiv('score', 'score'));
     document.body.appendChild(buildCanv('tetris', 'tetris', 240, 400));
-    //ReactDOM.render(<Tetris />, document.getElementById('tetris'));
     Tetris();
     document.body.classList.add('tetris');
     break;
   default: 
+    document.title = origTitle;
     document.body.appendChild(buildDiv('portfolio', 'portfolio'));
-    ReactDOM.render(<Portfolio />, document.getElementById('portfolio')); 
+    ReactDOM.render(<Portfolio />, document.getElementById('portfolio'));
     document.body.classList.add('portfolio');
     break;
 }
