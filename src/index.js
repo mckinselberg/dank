@@ -1,15 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+//CSS
 import './index.css';
+import './css/Portfolio.css';
+import './css/animate.css';
+//Components
 import Portfolio from './components/Portfolio';
 import Mastermind from './components/Mastermind/Game';
 import Quotes from './components/Quotes/QuotesComponent';
 import Tetris from './components/Tetris/Tetris';
+
 import qs from './utilities/qs';
 import * as serviceWorker from './serviceWorker';
 
-const origTitle = document.title;
-
+const loadTitle = document.title;
 
 const buildDiv = (id, component) => {
   let div = document.createElement('div');
@@ -52,7 +56,7 @@ switch(qs.p) {
     document.body.classList.add('tetris');
     break;
   default: 
-    document.title = origTitle;
+    document.title = loadTitle;
     document.body.appendChild(buildDiv('portfolio', 'portfolio'));
     ReactDOM.render(<Portfolio />, document.getElementById('portfolio'));
     document.body.classList.add('portfolio');

@@ -1,5 +1,5 @@
 // get qs parameters
-const qs = ((a) => {
+const QS = ((a) => {
   if (a === "") return {};
   var b = {};
 
@@ -15,4 +15,4 @@ const qs = ((a) => {
   
 })(window.location.search.substr(1).split('&'));
 
-export default qs;
+export default QS;

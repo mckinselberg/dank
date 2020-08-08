@@ -71,7 +71,7 @@ export default class RandomAnimations extends Component {
           <img className={`animated ${this.randomAnimation1}`} src={splashlogo} alt={`Dan Kinsley Web Developer Logo`}/>
           <div className={`experience animated  ${this.randomAnimation1}`} >
             {this.addDecoration()}
-            <h1>Front-End Developer,<br/>currently seeking<br/> a contract or<br/> full-time position.<br/> Get ahold of me. </h1>
+            <h1>Full Stack Developer,<br/>currently seeking<br/> a contract or<br/> full-time position.</h1>
           </div>
         </div>
         

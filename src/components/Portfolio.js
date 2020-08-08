@@ -1,12 +1,6 @@
 import React, {Component} from 'react';
-//import logo from './splash_logo.png';
-import '../css/Portfolio.css';
-import '../css/animate.css';
 import RandomAnimations from './RandomAnimations.js';
 import { sample } from 'lodash';
-//import Mastermind from './components/Mastermind/Game.js';
-//import Advice from './components/Advice/App';
-//import PortfolioItem from './components/PortfolioItem.js';
 import Link from './Link.js';
 
 
@@ -86,6 +80,7 @@ export default class App extends Component{
   }
 
   render() {
+    const _fontSize = '1.13em';
     return (
       <div className="App">
         <div className={`Splash ${this.state.splash}`}>
@@ -94,7 +89,18 @@ export default class App extends Component{
         <div className={`experience animated ${this.randomAnimation}`}>
           {this.addDecoration()}
           <h2>Current Job Skillset</h2>
-          <p>HTML5, XML, CSS3, SCSS,<br/>ES6+, React, Git, webpack</p>
+          <p>HTML5, XML, XSLT, CSS3, SCSS,<br/>ES6+, React, webpack <br/> Git, Azure</p>
+          <br/>
+          {this.addDecoration()}
+          <h2>More Skills</h2>
+          <p><span style={{fontSize:_fontSize}}>L</span>AMP Stack App Development,<br/>
+             including PHP &amp; DB dev<br/>
+             <span style={{fontSize:_fontSize}}>A</span>pache Config, Implementation,<br/>
+             &amp; Management with both<br/>
+             Shell and API tools.<br/>
+             <span style={{fontSize:_fontSize}}>R</span>esponsive Design<br/>
+             <span style={{fontSize:_fontSize}}>P</span>roject Management<br/>
+             </p>
           <br/>
           {this.addDecoration()}
           <h2>Work Experience</h2>

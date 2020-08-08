@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import TurnsHistory from './TurnsHistory.js';
-import './Mastermind.css';
  
 export default class Game extends Component {
   constructor(props) {
@@ -249,11 +248,11 @@ export default class Game extends Component {
           <button onClick={this.cancelDiffOptions}>Cancel</button>
         </div>
         <div className="game">
-            <h1 className={this.state.isNewGame === true ? `new-game` : ``}>Mastermind</h1>
           <div className="button-container">
             <button onClick={this.resetGame}>New Game</button>
             <button onClick={this.showDiffOptions}>difficulty</button>
           </div>
+            <h1 className={this.state.isNewGame === true ? `new-game` : ``}>Mastermind</h1>
           {/*this.state.solutionArr.map(function(color,i) {
             //return <li key={i}>{color}</li>
           })*/}
