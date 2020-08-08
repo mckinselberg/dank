@@ -98,8 +98,8 @@ export default class App extends Component{
              <span style={{fontSize:_fontSize}}>A</span>pache Config, Implementation,<br/>
              &amp; Management with both<br/>
              Shell and API tools.<br/>
-             <span style={{fontSize:_fontSize}}>R</span>esponsive Design<br/>
-             <span style={{fontSize:_fontSize}}>P</span>roject Management<br/>
+             <span style={{fontSize:_fontSize}}>R</span>esponsive Design.<br/>
+             <span style={{fontSize:_fontSize}}>P</span>roject Management.<br/>
              </p>
           <br/>
           {this.addDecoration()}
