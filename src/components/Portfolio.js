@@ -93,7 +93,8 @@ export default class App extends Component{
           <br/>
           {this.addDecoration()}
           <h2>More Skills</h2>
-          <p><span style={{fontSize:_fontSize}}>L</span>AMP Stack App Development,<br/>
+          <p><span style={{fontSize:_fontSize}}>U</span>I, UX Design and QA.<br/>
+            <span style={{fontSize:_fontSize}}>L</span>AMP Stack App Development,<br/>
              including PHP &amp; DB dev<br/>
              <span style={{fontSize:_fontSize}}>A</span>pache Config, Implementation,<br/>
              &amp; Management with both<br/>
