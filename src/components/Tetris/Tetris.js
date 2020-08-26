@@ -37,7 +37,6 @@ function Tetris() {
     return false;
   }
 
-
   function createMatrix(w, h) {
     const matrix = [];
     while (h--) {
@@ -60,15 +59,15 @@ function Tetris() {
       ];
     } else if (type === 'L') {
       return [
+        [3, 3, 0],
         [0, 3, 0],
-        [0, 3, 0],
-        [0, 3, 3]
+        [0, 3, 0]
       ];
     } else if (type === 'J') {
       return [
+        [0, 4, 4],
         [0, 4, 0],
-        [0, 4, 0],
-        [4, 4, 0]
+        [0, 4, 0]
       ];
     } else if (type === 'I') {
       return [
@@ -154,7 +153,6 @@ function Tetris() {
     }
   }
 
-
   function playerRotate(dir) {
     const pos = player.pos.x;
     let offset = 1;
@@ -211,14 +209,14 @@ function Tetris() {
   }
 
   const colors = [
-    null,
-    'red',
-    'salmon',
-    'pink',
-    'violet',
-    'orange',
-    'blue',
-    'green'
+    null, //0
+    'white', //1
+    'white', //2 
+    'salmon', //3
+    'salmon', //4
+    'salmon', //5
+    'salmon', //6
+    'green' //7
   ]
 
   const arena = createMatrix(12, 20);

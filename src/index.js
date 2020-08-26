@@ -12,7 +12,6 @@ import Tetris from './components/Tetris/Tetris';
 
 import qs from './utilities/qs';
 import * as serviceWorker from './serviceWorker';
-
 const loadTitle = document.title;
 
 const buildDiv = (id, component) => {

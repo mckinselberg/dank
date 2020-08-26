@@ -111,9 +111,9 @@ export default class App extends Component{
             <Link name="AllianceBernstein/c" url="https://www.alliancebernstein.com/investments/us/retirement/collective-investment-trusts/home.htm"/>
             <Link name="AllianceBernstein/d" url="https://www.alliancebernstein.com/investments/us/retirement/lifetime-income-strategy/home.htm"/>
             {/*<Link name="AllianceBernstein/d" url="https://www.alliancebernstein.com/investments/us/retirement/ira/home.htm"/>*/}
-            <Link name="Irwin Leighton" url="https://irwinleighton.com/"/>
             <Link name="LPW Training Services" url="https://lpwtraining.com/"/>
             <Link name="Vintage Epicure" url="https://vintageepicure.com/"/>
+            <Link name="Irwin Leighton" url="https://irwinleighton.com/"/>
             <Link name="Chista" url="https://www.chista.net"/>
           </ul>
           <br/>
