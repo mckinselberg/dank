@@ -9,7 +9,7 @@ import Portfolio from './components/Portfolio';
 import Mastermind from './components/Mastermind/Game';
 import Quotes from './components/Quotes/QuotesComponent';
 import Tetris from './components/Tetris/Tetris';
-
+import AudioPlayer from './components/AudioPlayer/AudioPlayerComponent';
 import qs from './utilities/qs';
 import * as serviceWorker from './serviceWorker';
 const loadTitle = document.title;
@@ -53,6 +53,11 @@ switch(qs.p) {
     document.body.appendChild(buildCanv('tetris', 'tetris', 240, 400));
     Tetris();
     document.body.classList.add('tetris');
+    break;
+  case 'audio-player': 
+    document.body.appendChild(buildDiv('audio-player', 'audio-player'));
+    document.body.classList.add('audio-player');
+    ReactDOM.render(<AudioPlayer />, document.getElementById('audio-player'));
     break;
   default: 
     document.title = loadTitle;
