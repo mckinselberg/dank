@@ -15,7 +15,7 @@
             overflow-x: scroll;
             overflow-y: hidden;
             width: 100%;
-            height: 110px;
+            height: 100%;
             white-space: nowrap;
             margin: 10px;
         }
@@ -33,7 +33,7 @@
 
         .octave {
             display: inline-block;
-            padding: 0 16px 0 0;
+            padding: 0 56px 0 0;
         }
 
         .key {
@@ -41,8 +41,8 @@
             font: 16px "Open Sans", "Lucida Grande", "Arial", sans-serif;
             border: 1px solid black;
             border-radius: 5px;
-            width: 20px;
-            height: 80px;
+            width: 100px;
+            height: 380px;
             text-align: center;
             box-shadow: 2px 2px darkgray;
             display: inline-block;
@@ -52,12 +52,14 @@
             -moz-user-select: none;
             -webkit-user-select: none;
             -ms-user-select: none;
+            margin-bottom:100px;
         }
         .key.sharp { 
             background-color:black;
             color:white;
             height:40px;
             margin-top:-40px;   
+            margin-bottom:50px
         }
 
         .key div {
@@ -118,11 +120,28 @@
         .right input {
             vertical-align: baseline;
         }
-		/**/
     </style>
 </head>
 
 <body>
+    
+        <!--<audio src="./music/181102-001.mp3"></audio>-->
+        <!--http://127.0.0.1:5501/dist/music/181102-001.mp3-->
+        <!--http://127.0.0.1:5501/dist/music/170523 Easier.mp3-->
+        <!--<audio src="http://127.0.0.1:5501/dist/music/Glory Box.mp3" crossOrigin="anonymous"></audio>-->
+    
+    
+
+    <div id="audio-player-container">
+        <audio src="music/drive-004.mp3" crossOrigin="anonymous"></audio>
+        <button data-playing="false" role="switch" aria-checked="false">
+            <span>Play/Pause</span>
+        </button>
+        <input type="range" id="volume" min="0" max="2" value="1" step="0.01">
+        <input type="range" id="panner" min="-1" max="1" value="0" step="0.01">
+    </div>
+
+    
 
     <div id="synth-container">
 
@@ -158,6 +177,6 @@
     </div>
     
     
-<script type="text/javascript" src="synth.js"></script></body>
+</body>
 
 </html>
