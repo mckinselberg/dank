@@ -103,18 +103,6 @@ export default class App extends Component{
            QA<br/>
           </p>
           {this.addDecoration()}
-          <h2>More Skills</h2>
-          <p>
-            <span style={{fontSize:_fontSize}}>R</span>esponsive Design.<br/>
-            <span style={{fontSize:_fontSize}}>P</span>roject Management.<br/>
-            <span style={{fontSize:_fontSize}}>L</span>AMP Stack App Development,<br/>
-             including PHP &amp; DB dev<br/>
-             <span style={{fontSize:_fontSize}}>A</span>pache Config, Implementation,<br/>
-             &amp; Management with both<br/>
-             Shell and API tools.<br/>
-          </p>
-          <br/>
-          {this.addDecoration()}
           <h2>Select Work Experience</h2>
           <ul>
             <Link name="AllianceBernstein/a" url="https://www.alliancebernstein.com/sites/campaign/theme/volatility/crisis-dashboard.htm"/>
@@ -127,6 +115,17 @@ export default class App extends Component{
             <Link name="Irwin Leighton" url="https://irwinleighton.com/"/>
             <Link name="Chista" url="https://www.chista.net"/>
           </ul>
+          {this.addDecoration()}
+          <h2>More Skills</h2>
+          <p>
+            <span style={{fontSize:_fontSize}}>R</span>esponsive Design.<br/>
+            <span style={{fontSize:_fontSize}}>P</span>roject Management.<br/>
+            <span style={{fontSize:_fontSize}}>L</span>AMP Stack App Development,<br/>
+             including PHP &amp; DB dev<br/>
+             <span style={{fontSize:_fontSize}}>A</span>pache Config, Implementation,<br/>
+             &amp; Management with both<br/>
+             Shell and API tools.<br/>
+          </p>
         </div>
       </div>
     );
