@@ -87,24 +87,35 @@ export default class App extends Component{
             <RandomAnimations />
         </div>
         <div className={`experience animated ${this.randomAnimation}`}>
+          
+          <ul>
+            {this.addDecoration()}
+            <Link name="Resumé" url="/dan-kinsley-resume.pdf"/>
+            {/*<Link name="Github" url="https://github.com/mckinselberg"/>*/}
+          </ul>
           {this.addDecoration()}
           <h2>Current Job Skillset</h2>
-          <p>HTML5, XML, XSLT, CSS3, SCSS,<br/>ES6+, React, Webpack <br/> Git, Azure</p>
-          <br/>
+          <p>HTML, SCSS<br/>
+           XML/XSLT<br/>
+           ES7 with React<br/>
+           JavaScript <br/>
+           Git, Azure <br/>
+           QA<br/>
+          </p>
           {this.addDecoration()}
           <h2>More Skills</h2>
-          <p><span style={{fontSize:_fontSize}}>U</span>I, UX Design and QA.<br/>
+          <p>
+            <span style={{fontSize:_fontSize}}>R</span>esponsive Design.<br/>
+            <span style={{fontSize:_fontSize}}>P</span>roject Management.<br/>
             <span style={{fontSize:_fontSize}}>L</span>AMP Stack App Development,<br/>
              including PHP &amp; DB dev<br/>
              <span style={{fontSize:_fontSize}}>A</span>pache Config, Implementation,<br/>
              &amp; Management with both<br/>
              Shell and API tools.<br/>
-             <span style={{fontSize:_fontSize}}>R</span>esponsive Design.<br/>
-             <span style={{fontSize:_fontSize}}>P</span>roject Management.<br/>
-             </p>
+          </p>
           <br/>
           {this.addDecoration()}
-          <h2>Work Experience</h2>
+          <h2>Select Work Experience</h2>
           <ul>
             <Link name="AllianceBernstein/a" url="https://www.alliancebernstein.com/sites/campaign/theme/volatility/crisis-dashboard.htm"/>
             <Link name="AllianceBernstein/b" url="https://www.alliancebernstein.com/sites/campaign/theme/tech-and-innovation.htm?Seg=56"/>
@@ -116,28 +127,6 @@ export default class App extends Component{
             <Link name="Irwin Leighton" url="https://irwinleighton.com/"/>
             <Link name="Chista" url="https://www.chista.net"/>
           </ul>
-          <br/>
-          <ul>
-            {this.addDecoration()}
-            <Link name="Resumé" url="/dan-kinsley-resume.pdf"/>
-            {/*<Link name="Github" url="https://github.com/mckinselberg"/>*/}
-          </ul>
-          
-          {/*}
-          <div className={'buttons'}>
-            <button onClick={this.setVisibility} className={this.state.mastermind === this.visibility[1] ? `active` : ``} value="mastermind">Mastermind</button>
-            <p>{`< Some Apps I've created >`}</p>
-            <button onClick={this.setVisibility} className={this.state.advice === this.visibility[1] ? `active` : ``} value="advice">Advice</button>
-          </div>
-          <div className={`Portfolio`}>
-            <div className={`portfolio-item ${this.state.mastermind === this.visibility[1] ? `shown` : `hidden`}`}>
-              <Mastermind/>
-            </div>
-            <div className={`portfolio-item ${this.state.advice === this.visibility[1] ? `shown` : `hidden`}`}>
-              <Advice/>
-            </div>
-          </div>
-          */}
         </div>
       </div>
     );

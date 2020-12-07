@@ -103,6 +103,7 @@ export default function AudioPlayerComponent() {
     audioElement.src = `/music/${url}`;
     setSong(song);
     setPlayState('playing');
+    setAudioElState(refAudioEl.current);
     audioElement.play();
   }
 
@@ -132,7 +133,12 @@ export default function AudioPlayerComponent() {
       {/* {playButton} */}
       {/* <Song name="more" url="more.mp3"  /> */}
 
-      {/* {(()=>{debugger;console.log(audioElement)})()} */}
+      {(()=>{
+        /*debugger*/;
+        console.log(audioElState);
+        console.log(audioContextState);
+        Object.entries(audioElState);
+      })()}
 
       {refAudioEl.current.addEventListener('ended', (e) => {
         console.log(e);

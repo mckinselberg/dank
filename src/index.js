@@ -14,7 +14,7 @@ import AudioPlayer from './components/AudioPlayer/AudioPlayerComponent';
 import qs from './utilities/qs';
 import * as serviceWorker from './serviceWorker';
 const loadTitle = document.title;
-const winLocPathName = window.location.pathname.split('/');
+//const winLocPathName = window.location.pathname.split('/');
 
 const buildDiv = (id, component) => {
   let div = document.createElement('div');
@@ -73,7 +73,6 @@ switch(qs.p) {
     document.body.classList.add('portfolio');
     break;
 }
-
 //document.body.classList.add('bodyLoaded');
 
 
