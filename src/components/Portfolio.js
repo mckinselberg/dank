@@ -89,7 +89,7 @@ export default class App extends Component{
         <div className={`experience animated ${this.randomAnimation}`}>
           {this.addDecoration()}
           <h2>Current Job Skillset</h2>
-          <p>HTML5, XML, XSLT, CSS3, SCSS,<br/>ES6+, React, webpack <br/> Git, Azure</p>
+          <p>HTML5, XML, XSLT, CSS3, SCSS,<br/>ES6+, React, Webpack <br/> Git, Azure</p>
           <br/>
           {this.addDecoration()}
           <h2>More Skills</h2>

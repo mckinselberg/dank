@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import '../../css/audio-player.css';
 //import ReactDOM from 'react-dom';
 //import Song from '../SongPage/Song';
@@ -19,15 +19,23 @@ audioElement.src = "/music/boombap.mp3";
 //const track = audioContext.createMediaElementSource(audioElement);
 //track.connect(audioContext.destination);
 
-audioElement.addEventListener('ended', () => {
-  alert(`it's done playing`);
-}, false);
-
 if (audioContext.state === 'suspended') {
   audioContext.resume();
 }
+  
+/*
+let i = 0;
+audioElement.addEventListener('ended', () => {
+  console.log(i); i++;
+  console.log(`it's done playing`);
+}, false);
+*/
 
 const songs = [
+  {
+    name: 'reset',
+    url: 'fx/reset.mp3'
+  },
   {
     name: 'more',
     url: 'more.mp3'
@@ -69,19 +77,26 @@ const songs = [
 export default function AudioPlayerComponent() {
   const [playState, setPlayState] = useState('paused');
   const [currentSong, setSong] = useState("boombap");
+  const refAudioEl = useRef(audioElement);
+  const [audioElState, setAudioElState] = useState(refAudioEl.current);
+  const refAudioContextState = useRef(audioContext);
+  const [audioContextState, setAudioContextState] = useState(refAudioContextState)
   
 
-  function pressPlay() {    
+  function pressPlay() {   
+    // control audio element 
     if (audioElement.paused) {
       audioElement.play();
     } else {
       audioElement.pause();
     }
+    // control ui
     if (playState === 'paused') {
       setPlayState('playing');
     } else {
       setPlayState('paused');
     }
+    setAudioContextState(refAudioContextState);
   }
 
   function changeSong(song, url) {
@@ -90,6 +105,8 @@ export default function AudioPlayerComponent() {
     setPlayState('playing');
     audioElement.play();
   }
+
+  
 
 
   // gain node
@@ -114,10 +131,17 @@ export default function AudioPlayerComponent() {
     <>
       {/* {playButton} */}
       {/* <Song name="more" url="more.mp3"  /> */}
+
+      {/* {(()=>{debugger;console.log(audioElement)})()} */}
+
+      {refAudioEl.current.addEventListener('ended', (e) => {
+        console.log(e);
+        console.log('component scope ended');
+      })}
       
       <button className="play-button" onClick={pressPlay}>{playState === 'paused' ? 'Play' : 'Pause'}</button>
       <br/>
-      <h1>{currentSong + ' is ' + playState}</h1>
+      <h1>{`"${currentSong}" is ${playState}`}</h1>
       <br/>
       <br/>
       <div className="songs">

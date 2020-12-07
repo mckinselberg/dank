@@ -2,7 +2,7 @@
   transition: all 1s;
 }
 body {
-  padding:2px;
+  padding:2px 2px 20px 2px;
   overflow:hidden;
   overflow-x:hidden;  
   overflow-y: scroll;
