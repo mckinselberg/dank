@@ -1,11 +1,9 @@
-import React, { useState, useRef } from 'react';
+import React from 'react';
 //import ReactDOM from 'react-dom';
-//import Song from '../SongPage/Song';
+import Song from './Song';
 
 
 export default function AudioPlayerComponent() {
-
-  const [state, setState] = useState('paused');
   // for legacy browsers
   const AudioContext = window.AudioContext || window.webkitAudioContext;
   // instantiate audio context in your app
@@ -22,18 +20,14 @@ export default function AudioPlayerComponent() {
   const track = audioContext.createMediaElementSource(audioElement);
   //track.connect(audioContext.destination);
 
-  
-
-  const refAudioContext = useRef(audioElement);
-
-  /*
-
 
 
   audioElement.addEventListener('ended', () => {
     playButton.dataset.playing = 'false';
     alert(`it's done playing`);
   }, false);
+
+
   const playButton = document.createElement('button');
 
   playButton.addEventListener('click', function() {
@@ -53,27 +47,6 @@ export default function AudioPlayerComponent() {
     }
 
   }, false);
-  */
-
-
-  // React Version
-  function pressPlay() {
-    //playing === false ? audioElement.play() : audioElement.pause();
-    //playing === false ? setPlaying(true) : setPlaying(false);
-    
-
-    
-    if (audioElement.paused) {
-      refAudioContext.play();
-    } else {
-      refAudioContext.pause();
-    }
-    if (state === 'paused') {
-      setState('playing');
-    } else {
-      setState('paused');
-    }
-  }
 
 
   // gain node
@@ -97,9 +70,7 @@ export default function AudioPlayerComponent() {
   return (
     <>
       {/* {playButton} */}
-      {/* <Song name="more" url="more.mp3"  /> */}
-      
-      <button onClick={pressPlay}>{state === 'paused' ? 'Play' : 'Pause'}</button>
+      <Song name="tr8tr" url="tr8tr.mp3"  />
     </>
   )
 }
