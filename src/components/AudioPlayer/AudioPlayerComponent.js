@@ -115,7 +115,7 @@ export default function AudioPlayerComponent() {
       {/* {playButton} */}
       {/* <Song name="more" url="more.mp3"  /> */}
       
-      <button onClick={pressPlay}>{playState === 'paused' ? 'Play' : 'Pause'}</button>
+      <button className="play-button" onClick={pressPlay}>{playState === 'paused' ? 'Play' : 'Pause'}</button>
       <br/>
       <h1>{currentSong + ' is ' + playState}</h1>
       <br/>
