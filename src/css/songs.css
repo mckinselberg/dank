@@ -1,0 +1,25 @@
+body {
+  
+}
+
+.songs {
+  display:flex;
+  flex-direction:column;
+}
+
+@media (min-width: 767px) {
+  .songs {
+    padding: 0 20% 0 20%;
+  }
+  
+}
+.song {
+  padding:20px;
+  display:flex;
+  align-items:center;
+  border-bottom:1px solid grey;
+  justify-content: space-between;
+}
+.song span {
+  padding-right:20px;
+}

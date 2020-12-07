@@ -3,12 +3,13 @@ import ReactDOM from 'react-dom';
 //CSS
 import './index.css';
 import './css/Portfolio.css';
-import './css/animate.css';
+//import './css/animate.css';
 //Components
 import Portfolio from './components/Portfolio';
 import Mastermind from './components/Mastermind/Game';
 import Quotes from './components/Quotes/QuotesComponent';
 import Tetris from './components/Tetris/Tetris';
+import SongPage from './components/SongPage/SongPage';
 import AudioPlayer from './components/AudioPlayer/AudioPlayerComponent';
 import qs from './utilities/qs';
 import * as serviceWorker from './serviceWorker';
@@ -20,7 +21,7 @@ const buildDiv = (id, component) => {
   return div;
 }
 
-const buildCanv = (id, component, w, h) => {
+function buildCanv(id, component, w, h) {
   let canv = document.createElement('canvas');
   canv.setAttribute('id', component);
   canv.setAttribute('width', w);
@@ -54,7 +55,12 @@ switch(qs.p) {
     Tetris();
     document.body.classList.add('tetris');
     break;
-  case 'audio-player': 
+  case 'songs':
+    document.body.appendChild(buildDiv('song-page', 'song-page'));
+    document.body.classList.add('song-page');
+    ReactDOM.render(<SongPage />, document.getElementById('song-page'));
+    break;    
+  case 'audio-player':
     document.body.appendChild(buildDiv('audio-player', 'audio-player'));
     document.body.classList.add('audio-player');
     ReactDOM.render(<AudioPlayer />, document.getElementById('audio-player'));
@@ -67,7 +73,7 @@ switch(qs.p) {
     break;
 }
 
-document.body.classList.add('bodyLoaded');
+//document.body.classList.add('bodyLoaded');
 
 
 // If you want your app to work offline and load faster, you can change
