@@ -1,78 +1,94 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
+import '../../css/audio-player.css';
 //import ReactDOM from 'react-dom';
 //import Song from '../SongPage/Song';
 
+// initialize audio context outside of function component scope
+const AudioContext = window.AudioContext || window.webkitAudioContext; // <-- for legacy browsers
+// instantiate audio context in your app
+const audioContext = new AudioContext();
+// get the audio element
+//from doc
+//const audioElement = document.querySelector('audio');
+//or
+//create on the fly
+let audioElement = document.createElement('audio'); //document.querySelector('audio');
+audioElement.crossOrigin = "anonymous";
+audioElement.src = "/music/boombap.mp3";
+// pass it into the audio context
+//const track = audioContext.createMediaElementSource(audioElement);
+//track.connect(audioContext.destination);
+
+audioElement.addEventListener('ended', () => {
+  alert(`it's done playing`);
+}, false);
+
+if (audioContext.state === 'suspended') {
+  audioContext.resume();
+}
+
+const songs = [
+  {
+    name: 'more',
+    url: 'more.mp3'
+  },
+  {
+    name: "drive",
+    url:"drive-005.mp3"
+  },
+  {
+    name: "boom bap",
+    url:"boombap.mp3"
+  },
+  {
+    name: "boom bap nope",
+    url:"boombapnope.mp3"
+  },
+  {
+    name: 'glory box',
+    url: 'Glory Box.mp3'
+  },
+  {
+    name: 'noir',
+    url: 'noir.mp3'
+  },
+  {
+    name: 'quarantine',
+    url: 'Quarantine.mp3'
+  },
+  {
+    name: 'run',
+    url: 'run.mp3'
+  },
+  {
+    name: 'yamahahaha',
+    url: '181102-001.mp3'
+  }
+];
 
 export default function AudioPlayerComponent() {
-
-  const [state, setState] = useState('paused');
-  // for legacy browsers
-  const AudioContext = window.AudioContext || window.webkitAudioContext;
-  // instantiate audio context in your app
-  const audioContext = new AudioContext();
-  // get the audio element
-  //from doc
-  //const audioElement = document.querySelector('audio');
-  //or
-  //create on the fly
-  let audioElement = document.createElement('audio'); //document.querySelector('audio');
-  audioElement.crossOrigin = "anonymous";
-  audioElement.src = "/music/drive-004.mp3";
-  // pass it into the audio context
-  const track = audioContext.createMediaElementSource(audioElement);
-  //track.connect(audioContext.destination);
-
+  const [playState, setPlayState] = useState('paused');
+  const [currentSong, setSong] = useState("boombap");
   
 
-  const refAudioContext = useRef(audioElement);
-
-  /*
-
-
-
-  audioElement.addEventListener('ended', () => {
-    playButton.dataset.playing = 'false';
-    alert(`it's done playing`);
-  }, false);
-  const playButton = document.createElement('button');
-
-  playButton.addEventListener('click', function() {
-
-    // check if context is in suspended state (autoplay policy)
-    if (audioContext.state === 'suspended') {
-        audioContext.resume();
-    }
-
-    // play or pause track depending on state
-    if (this.dataset.playing === 'false') {
-        audioElement.play();
-        this.dataset.playing = 'true';
-    } else if (this.dataset.playing === 'true') {
-        audioElement.pause();
-        this.dataset.playing = 'false';
-    }
-
-  }, false);
-  */
-
-
-  // React Version
-  function pressPlay() {
-    //playing === false ? audioElement.play() : audioElement.pause();
-    //playing === false ? setPlaying(true) : setPlaying(false);
-    
-
-    
+  function pressPlay() {    
     if (audioElement.paused) {
-      refAudioContext.play();
+      audioElement.play();
     } else {
-      refAudioContext.pause();
+      audioElement.pause();
     }
-    if (state === 'paused') {
-      setState('playing');
+    if (playState === 'paused') {
+      setPlayState('playing');
     } else {
-      setState('paused');
+      setPlayState('paused');
     }
+  }
+
+  function changeSong(song, url) {
+    audioElement.src = `/music/${url}`;
+    setSong(song);
+    setPlayState('playing');
+    audioElement.play();
   }
 
 
@@ -80,7 +96,7 @@ export default function AudioPlayerComponent() {
   const gainNode = audioContext.createGain();
   // gainNode.gain.value = 0;
   // connect gain node to audioContext.destination
-  track.connect(gainNode).connect(audioContext.destination);
+  //track.connect(gainNode).connect(audioContext.destination);
 
   const volumeControl = document.createElement('input');
   volumeControl.type="range";
@@ -99,7 +115,18 @@ export default function AudioPlayerComponent() {
       {/* {playButton} */}
       {/* <Song name="more" url="more.mp3"  /> */}
       
-      <button onClick={pressPlay}>{state === 'paused' ? 'Play' : 'Pause'}</button>
+      <button onClick={pressPlay}>{playState === 'paused' ? 'Play' : 'Pause'}</button>
+      <br/>
+      <h1>{currentSong + ' is ' + playState}</h1>
+      <br/>
+      <br/>
+      <div className="songs">
+        {songs.map((song,i) => {
+          return (
+            <button key={i} onClick={()=>{changeSong(song.name, song.url)}}>{song.name}</button>
+          );
+        })}
+      </div>
     </>
   )
 }

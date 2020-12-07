@@ -40,7 +40,8 @@ export default function SongPage() {
       name: 'yamahahaha',
       url: '181102-001.mp3'
     }
-  ]
+  ];
+  
   return (
     <div className="songs">
       {songs.map((song,i) => <Song key={i} name={song.name} url={song.url} />)}

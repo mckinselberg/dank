@@ -1,10 +1,7 @@
-body {
-  
-}
 
 .songs {
   display:flex;
-  flex-direction:column;
+  flex-direction: column;
 }
 
 @media (min-width: 767px) {

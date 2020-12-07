@@ -1,0 +1,15 @@
+.audio-player {
+  padding:20px;
+}
+  .current-song {
+    text-align: center;
+  }
+  .songs {
+    display:flex;
+    flex-direction:row;
+    flex-direction:column;
+  }
+
+  .songs > * {
+    margin-bottom:20px;
+  }

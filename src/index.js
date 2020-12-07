@@ -11,9 +11,10 @@ import Quotes from './components/Quotes/QuotesComponent';
 import Tetris from './components/Tetris/Tetris';
 import SongPage from './components/SongPage/SongPage';
 import AudioPlayer from './components/AudioPlayer/AudioPlayerComponent';
-import qs from './utilities/qs';
+//import qs from './utilities/qs';
 import * as serviceWorker from './serviceWorker';
 const loadTitle = document.title;
+const winLocPathName = window.location.pathname.split('/');
 
 const buildDiv = (id, component) => {
   let div = document.createElement('div');
@@ -29,8 +30,7 @@ function buildCanv(id, component, w, h) {
   return canv;
 }
 
-
-switch(qs.p) {
+switch(winLocPathName[1]) {
   /*
   case undefined: 
     document.body.appendChild(buildDiv('portfolio', 'portfolio'));
