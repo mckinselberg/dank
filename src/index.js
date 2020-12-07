@@ -11,7 +11,7 @@ import Quotes from './components/Quotes/QuotesComponent';
 import Tetris from './components/Tetris/Tetris';
 import SongPage from './components/SongPage/SongPage';
 import AudioPlayer from './components/AudioPlayer/AudioPlayerComponent';
-//import qs from './utilities/qs';
+import qs from './utilities/qs';
 import * as serviceWorker from './serviceWorker';
 const loadTitle = document.title;
 const winLocPathName = window.location.pathname.split('/');
@@ -30,7 +30,8 @@ function buildCanv(id, component, w, h) {
   return canv;
 }
 
-switch(winLocPathName[1]) {
+//switch(winLocPathName[1]) {
+switch(qs.p) {
   /*
   case undefined: 
     document.body.appendChild(buildDiv('portfolio', 'portfolio'));
