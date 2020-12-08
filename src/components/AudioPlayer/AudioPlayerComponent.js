@@ -37,6 +37,10 @@ const songs = [
     url: 'fx/reset.mp3'
   },
   {
+    name: 'crazy drums',
+    url: 'crazy-drums.mp3'
+  },
+  {
     name: 'more',
     url: 'more.mp3'
   },
