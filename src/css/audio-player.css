@@ -3,6 +3,11 @@
   width:50%;
   padding:30px;
 }
+@media (min-width: 767px) {
+  .play-button {
+    width:25%;
+  }
+}
 .audio-player {
   padding:20px;
 }
