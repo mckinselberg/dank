@@ -31,8 +31,7 @@ const songs = [
   {
     name: 'crazy drums',
     url: 'experimental/crazy-drums.mp3',
-    album: '',
-    
+    album: '',    
   },
   {
     name: 'more',
@@ -65,6 +64,10 @@ const songs = [
   {
     name: 'noir too',
     url: 'experimental/noir2.mp3'
+  },
+  {
+    name: 'noir 3',
+    url: 'experimental/170206-noir-3.mp3'
   },
   {
     name: 'quarantine',
