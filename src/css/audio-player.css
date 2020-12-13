@@ -8,6 +8,13 @@
     width:25%;
   }
 }
+@media (max-width: 300px) {
+  .play-button {
+    width:99%;
+    padding-left:5px;
+    padding-right:5px;
+  }
+}
 .audio-player {
   padding:20px;
 }
@@ -19,14 +26,12 @@
     flex-direction:row;
     flex-direction:column;
     display: flex;
-
-    /*
-    
+/*     
     flex-direction: row;
     justify-content: space-around;
     justify-content: space-around;
     flex-wrap: wrap;
-    flex-basis: 51%;
+    justify-content: flex-start;
     */
   }
 
