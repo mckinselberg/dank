@@ -101,7 +101,7 @@ export default function AudioPlayerComponent() {
       audioElement.pause();
     }
     // control ui
-    if (playState === 'is paused') {
+    if (playState === 'is paused' || playState === 'has ended') {
       setPlayState('is playing');
     } else {
       setPlayState('is paused');
@@ -115,7 +115,10 @@ export default function AudioPlayerComponent() {
     setAudioElState(refAudioEl.current);
     setAudioContextState(refAudioContextState.current);
     setPlayState('is playing');
+    
     audioElement.play();
+    console.log(`Audio Element state is ${audioElState}`);
+    console.log(`Audio Context state is ${audioContextState}`);
     //debugger;
   }
 
@@ -147,9 +150,9 @@ export default function AudioPlayerComponent() {
 
       {(()=>{
         /*debugger*/;
-        console.log(audioElState);
-        console.log(audioContextState);
-        Object.entries(audioElState);
+        //console.log(audioElState);
+        //console.log(audioContextState);
+        //Object.entries(audioElState);
       })()}
 
       {refAudioEl.current.addEventListener('ended', (e) => {
@@ -159,7 +162,7 @@ export default function AudioPlayerComponent() {
         setPlayState('has ended');
       })}
       
-      <button className="play-button" onClick={pressPlay}>{playState === 'is paused' || playState === 'has ended'  ? 'Play ▶' : 'Pause'}</button>
+      <button className="play-button" onClick={pressPlay}>{playState === 'is paused' || playState === 'has ended' ? 'Play' : 'Pause'}</button>
       <br/>
       <h1>{`"${currentSong}" ${playState}`}</h1>
       <br/>
