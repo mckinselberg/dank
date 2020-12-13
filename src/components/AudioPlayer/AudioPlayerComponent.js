@@ -1,40 +1,28 @@
 import React, { useState, useRef } from 'react';
 import '../../css/audio-player.css';
 //import ReactDOM from 'react-dom';
-//import Song from '../SongPage/Song';
 
 // initialize audio context outside of function component scope
 const AudioContext = window.AudioContext || window.webkitAudioContext; // <-- for legacy browsers
-// instantiate audio context in your app
+// instantiate audio context in app
 const audioContext = new AudioContext();
-// get the audio element
-//from doc
-//const audioElement = document.querySelector('audio');
-//or
-//create on the fly
-let audioElement = document.createElement('audio'); //document.querySelector('audio');
+// create audio element on the fly or use document.querySelector('audio');
+let audioElement = document.createElement('audio');
 audioElement.crossOrigin = "anonymous";
 audioElement.src = "/music/boombap.mp3";
-// pass it into the audio context
-//const track = audioContext.createMediaElementSource(audioElement);
-//track.connect(audioContext.destination);
 
 if (audioContext.state === 'suspended') {
   audioContext.resume();
 }
-  
-/*
-let i = 0;
-audioElement.addEventListener('ended', () => {
-  console.log(i); i++;
-  console.log(`it's done playing`);
-}, false);
-*/
 
 const songs = [
   {
     name: 'reset',
     url: 'fx/reset.mp3'
+  },
+  {
+    name: 'saturday',
+    url: '201213 Saturday.mp3'
   },
   {
     name: 'run',
@@ -115,21 +103,14 @@ export default function AudioPlayerComponent() {
     setAudioElState(refAudioEl.current);
     setAudioContextState(refAudioContextState.current);
     setPlayState('is playing');
-    
     audioElement.play();
-    console.log(`Audio Element state is ${audioElState}`);
-    console.log(`Audio Context state is ${audioContextState}`);
-    //debugger;
   }
-
-  
-
 
   // gain node
   const gainNode = audioContext.createGain();
   // gainNode.gain.value = 0;
   // connect gain node to audioContext.destination
-  //track.connect(gainNode).connect(audioContext.destination);
+  // track.connect(gainNode).connect(audioContext.destination);
 
   const volumeControl = document.createElement('input');
   volumeControl.type="range";
@@ -145,26 +126,16 @@ export default function AudioPlayerComponent() {
 
   return (
     <>
-      {/* {playButton} */}
-      {/* <Song name="more" url="more.mp3"  /> */}
-
       {(()=>{
-        /*debugger*/;
-        //console.log(audioElState);
-        //console.log(audioContextState);
-        //Object.entries(audioElState);
       })()}
 
       {refAudioEl.current.addEventListener('ended', (e) => {
-        console.log(e);
-        console.log('ended');
-        console.log('component scope ended');
         setPlayState('has ended');
       })}
       
       <button className="play-button" onClick={pressPlay}>{playState === 'is paused' || playState === 'has ended' ? 'Play' : 'Pause'}</button>
       <br/>
-      <h1>{`"${currentSong}" ${playState}`}</h1>
+      <h1 className={`current-song`}>{`"${currentSong}" ${playState}`}</h1>
       <br/>
       <br/>
       <div className="songs">
