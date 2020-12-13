@@ -37,8 +37,14 @@ const songs = [
     url: 'fx/reset.mp3'
   },
   {
+    name: 'run',
+    url: 'experimental/run.mp3'
+  },
+  {
     name: 'crazy drums',
-    url: 'crazy-drums.mp3'
+    url: 'experimental/crazy-drums.mp3',
+    album: '',
+    
   },
   {
     name: 'more',
@@ -46,7 +52,7 @@ const songs = [
   },
   {
     name: "drive",
-    url:"drive-005.mp3"
+    url:"unpro/drive-005.mp3"
   },
   {
     name: "boom bap",
@@ -62,15 +68,15 @@ const songs = [
   },
   {
     name: 'noir',
-    url: 'noir.mp3'
+    url: 'experimental/noir.mp3'
+  },
+  {
+    name: 'noir too',
+    url: 'experimental/noir2.mp3'
   },
   {
     name: 'quarantine',
     url: 'Quarantine.mp3'
-  },
-  {
-    name: 'run',
-    url: 'run.mp3'
   },
   {
     name: 'yamahahaha',
@@ -79,7 +85,7 @@ const songs = [
 ];
 
 export default function AudioPlayerComponent() {
-  const [playState, setPlayState] = useState('paused');
+  const [playState, setPlayState] = useState('is paused');
   const [currentSong, setSong] = useState("boombap");
   const refAudioEl = useRef(audioElement);
   const [audioElState, setAudioElState] = useState(refAudioEl.current);
@@ -95,10 +101,10 @@ export default function AudioPlayerComponent() {
       audioElement.pause();
     }
     // control ui
-    if (playState === 'paused') {
-      setPlayState('playing');
+    if (playState === 'is paused') {
+      setPlayState('is playing');
     } else {
-      setPlayState('paused');
+      setPlayState('is paused');
     }
     setAudioContextState(refAudioContextState);
   }
@@ -106,9 +112,11 @@ export default function AudioPlayerComponent() {
   function changeSong(song, url) {
     audioElement.src = `/music/${url}`;
     setSong(song);
-    setPlayState('playing');
     setAudioElState(refAudioEl.current);
+    setAudioContextState(refAudioContextState.current);
+    setPlayState('is playing');
     audioElement.play();
+    //debugger;
   }
 
   
@@ -146,12 +154,14 @@ export default function AudioPlayerComponent() {
 
       {refAudioEl.current.addEventListener('ended', (e) => {
         console.log(e);
+        console.log('ended');
         console.log('component scope ended');
+        setPlayState('has ended');
       })}
       
-      <button className="play-button" onClick={pressPlay}>{playState === 'paused' ? 'Play' : 'Pause'}</button>
+      <button className="play-button" onClick={pressPlay}>{playState === 'is paused' || playState === 'has ended'  ? 'Play ▶' : 'Pause'}</button>
       <br/>
-      <h1>{`"${currentSong}" is ${playState}`}</h1>
+      <h1>{`"${currentSong}" ${playState}`}</h1>
       <br/>
       <br/>
       <div className="songs">
