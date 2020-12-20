@@ -84,7 +84,7 @@ export default function AudioPlayerComponent() {
   const [currentSong, setSong] = useState("boombap");
   const [songDuration, setSongDuration] = useState(null);
   const [songCurrentTime, setSongCurrentTime] = useState(null);
-  //const refAudioElement = useRef(audioElement);
+  const refAudioElement = useRef(audioElement);
   //const [audioElState, setAudioElState] = useState(refAudioEl.current);
   //const refAudioContext = useRef(audioContext);
   //const [audioContextState, setAudioContextState] = useState(refAudioContext)
@@ -148,23 +148,24 @@ export default function AudioPlayerComponent() {
     <>
       {(()=>{
         //console.clear();
-        //console.log(refAudioEl.current);
-        console.log(audioElement.currentTime);
+        //console.log(refAudioElement.current);
+        //console.log(audioElement.currentTime);
         //console.log(songDuration);
         //console.log(refAudioContext.current)
       })()}
 
-      {audioElement.onloadedmetadata = (e) => {
-        console.log(e);
-        setSongDuration(audioElement.duration);
+      {refAudioElement.current.onloadedmetadata = (e) => {
+        //console.log(e);
+        setSongDuration(refAudioElement.current.duration);
       }}
 
       {audioElement.ontimeupdate = (e) => {
         console.log(e);
+        console.log(audioElement.currentTime)
         setSongCurrentTime(audioElement.currentTime);
       }}
 
-      {audioElement.onended, (e) => {
+      {refAudioElement.current.onended = (e) => {
         console.log(e);
         setPlayState('has ended');
       }}
@@ -174,6 +175,9 @@ export default function AudioPlayerComponent() {
       <h1 className={`current-song`}>{`"${currentSong}" ${playState}`}</h1>
       <p style={{textAlign:'center'}}>{formatTime(songCurrentTime)} of {formatTime(songDuration)}</p>
       <p style={{textAlign:'center'}}></p>
+      <br/>
+      <br/>
+      <div class="indicator"></div>
       <div className="songs">
         {songs.map((song,i) => {
           return (
