@@ -62,6 +62,7 @@ switch(qs.p) {
     ReactDOM.render(<SongPage />, document.getElementById('song-page'));
     break;    
   case 'audio-player':
+    document.title = "Audio Player"
     document.body.appendChild(buildDiv('audio-player', 'audio-player'));
     document.body.classList.add('audio-player');
     ReactDOM.render(<AudioPlayer />, document.getElementById('audio-player'));
