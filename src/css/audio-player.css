@@ -2,6 +2,11 @@
   font-size: 1.2rem;
   width: 50%;
   padding: 30px;
+  border: none;
+}
+.play-button:hover,
+.play-button:active {
+  border: none;
 }
 @media (min-width: 768px) {
   .play-button {
@@ -10,13 +15,34 @@
 }
 @media (max-width: 300px) {
   .play-button {
-    width: 99%;
-    padding-left: 5px;
-    padding-right: 5px;
+    width: 100%;
   }
 }
 .audio-player {
   padding: 20px;
+  position: relative;
+}
+.indicator-container {
+  width: 50%;
+  margin: 0 auto;
+  position: relative;
+  height: 0px;
+}
+@media (min-width: 768px) {
+  .indicator-container {
+    width: 25%;
+  }
+}
+.indicator {
+  top: 0px;
+  display: block;
+  width: 5%;
+  height: 10px;
+  background-color: #324c7e;
+  background-color: #ffffff;
+  background-color: rgb(240, 240, 240);
+  position: absolute;
+  transition: 0.0001s all;
 }
 .current-song {
   text-align: center;
