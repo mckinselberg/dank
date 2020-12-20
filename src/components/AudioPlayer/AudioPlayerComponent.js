@@ -8,6 +8,10 @@ export default class AudioPlayer extends Component{
     super();
     this.songs = [
       {
+        name: 'haunting',
+        url: 'haunting.mp3'
+      },
+      {
         name: 'reset',
         url: 'fx/reset.mp3'
       },
