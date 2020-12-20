@@ -151,12 +151,12 @@ export default class AudioPlayer extends Component{
           className="indicator"
           style={this.returnPosition()}>
         </div>
+        <p style={{textAlign:'center'}}>
+          {this.formatTime(this.state.currentTime)} of {this.formatTime(this.state.songDuration)}
+        </p>
       </div>
       <br/>
       <h1 className={`current-song`}>{`"${this.state.song.name}" ${this.state.playState}`}</h1>
-      <p style={{textAlign:'center'}}>
-        {this.formatTime(this.state.currentTime)} of {this.formatTime(this.state.songDuration)}
-      </p>
       <div className="songs">
         {this.songs.map((song,i) => {
           return (
