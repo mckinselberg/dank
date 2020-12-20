@@ -141,17 +141,17 @@ export default class AudioPlayer extends Component{
   render() {
     return (
     <>
+      <button className="play-button" onClick={this.pressPlay}>{
+        this.state.playState === 'is paused' || 
+        this.state.playState === 'has ended' ? 
+        'Play' : 'Pause'}
+      </button>
       <div className="indicator-container">
         <div 
           className="indicator"
           style={this.returnPosition()}>
         </div>
       </div>
-      <button className="play-button" onClick={this.pressPlay}>{
-        this.state.playState === 'is paused' || 
-        this.state.playState === 'has ended' ? 
-        'Play' : 'Pause'}
-      </button>
       <br/>
       <h1 className={`current-song`}>{`"${this.state.song.name}" ${this.state.playState}`}</h1>
       <p style={{textAlign:'center'}}>
