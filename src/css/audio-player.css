@@ -11,6 +11,10 @@ h1 {
 .songs button {
   background-color: #324c7e;
 }
+.songs button:hover,
+.songs button:active {
+  background-color: #fff;
+}
 .play-button:hover,
 .play-button:active {
   border: none;
@@ -59,6 +63,9 @@ h1 {
 .songs {
   display: flex;
   flex-direction: column;
+  /*flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-end;*/
 }
 p {
   margin-bottom: 30px;

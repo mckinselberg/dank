@@ -133,10 +133,10 @@ export default class AudioPlayer extends Component{
     if (isNaN(indicatorPosition)) {
         return {left: 0 + '%'}
     } else if (indicatorPosition < .5) {
-      console.log(indicatorPosition)
+      //console.log(indicatorPosition)
       return {left: indicatorPosition  * 100  + '%'}
     } else if (indicatorPosition > .5) {
-      console.log(indicatorPosition)
+      //console.log(indicatorPosition)
       return {right: ((1 - indicatorPosition) * 100)  + '%'}
     } else {
     }
