@@ -31,6 +31,7 @@ export default class App extends Component{
 
   componentDidMount() {
     ReactGA.initialize('UA-18240989-1');
+    ReactGA.pageview(window.location.pathname + window.location.search); 
   }
 
   render() {
