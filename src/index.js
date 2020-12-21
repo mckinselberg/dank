@@ -45,11 +45,13 @@ switch(qs.p) {
     document.body.appendChild(buildDiv('mastermind', 'mastermind'));
     ReactDOM.render(<Mastermind />, document.getElementById('mastermind'));
     document.body.classList.add('remove');
+    ReactGA.pageview(window.location.pathname + window.location.search);
     break;
   case 'quotes': 
     document.body.appendChild(buildDiv('quotes', 'quotes'));
     ReactDOM.render(<Quotes />, document.getElementById('quotes'));
     document.body.classList.add('quotes');
+    ReactGA.pageview(window.location.pathname + window.location.search);
     break;
   case 'tetris': 
     document.title = 'Tetris, from a tutorial by https://github.com/javascriptteacher';
@@ -57,6 +59,7 @@ switch(qs.p) {
     document.body.appendChild(buildCanv('tetris', 'tetris', 240, 400));
     Tetris();
     document.body.classList.add('tetris');
+    ReactGA.pageview(window.location.pathname + window.location.search);
     break;
   case 'songs':
     document.body.appendChild(buildDiv('song-page', 'song-page'));
