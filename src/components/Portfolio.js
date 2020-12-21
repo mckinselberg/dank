@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import { sample } from 'lodash';
 import Link from './Link.js';
 import ReactGA from 'react-ga';
 import splashlogo from '../img/splash_logo.png';
@@ -8,56 +7,6 @@ import splashlogo from '../img/splash_logo.png';
 export default class App extends Component{
   constructor(props) {
     super(props)
-    this.state = {
-      splash:'shown',
-      advice:'hidden',
-      mastermind:'hidden',
-      animations:[
-          'bounce',
-          'flash',
-          'pulse',
-          'rubberBand',
-          'shake',
-          'headShake',
-          'swing',
-          'tada',
-          'wobble',
-          'jello',
-          'bounceIn',
-          'bounceInDown',
-          'bounceInLeft',
-          'bounceInRight',
-          'bounceInUp',
-          'fadeIn',
-          'fadeInDown',
-          'fadeInDownBig',
-          'fadeInLeft',
-          'fadeInLeftBig',
-          'fadeInRight',
-          'fadeInRightBig',
-          'fadeInUp',
-          'fadeInUpBig',
-          'flipInX',
-          'flipInY',
-          'lightSpeedIn',
-          'rotateIn',
-          'rotateInDownLeft',
-          'rotateInDownRight',
-          'rotateInUpLeft',
-          'rotateInUpRight',
-          //'hinge',
-          'rollIn',
-          'zoomIn',
-          'zoomInDown',
-          'zoomInLeft',
-          'zoomInRight',
-          'zoomInUp',
-          'slideInDown',
-          'slideInLeft',
-          'slideInRight',
-        'slideInUp'],
-    }
-    this.randomAnimation = sample(this.state.animations);
     this.setVisibility = this.setVisibility.bind(this);
     this.visibility = ['hidden','shown'];
     this.addDecoration = this.addDecoration.bind(this);
@@ -81,13 +30,7 @@ export default class App extends Component{
   }
 
   componentDidMount() {
-    ReactGA.initialize('UA-18240989-1', {
-      debug: true,
-      titleCase: false,
-      gaOptions: {
-        userId: 123
-      }
-    });
+    ReactGA.initialize('UA-18240989-1');
   }
 
   render() {
@@ -101,7 +44,7 @@ export default class App extends Component{
             <h1>Full Stack Developer,<br/>currently seeking<br/> a contract or<br/> full-time position.</h1>
           </div>
         </div>
-        <div className={`experience animated ${this.randomAnimation}`}>
+        <div className={`experience`}>
           
           <ul>
             {this.addDecoration()}
