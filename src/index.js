@@ -68,16 +68,16 @@ switch(qs.p) {
     document.body.appendChild(buildDiv('audio-player', 'audio-player'));
     document.body.classList.add('audio-player');
     ReactDOM.render(<AudioPlayer />, document.getElementById('audio-player'));
+    ReactGA.pageview('/audio-player')
     break;
   default: 
     document.title = loadTitle;
     document.body.appendChild(buildDiv('portfolio', 'portfolio'));
     ReactDOM.render(<Portfolio />, document.getElementById('portfolio'));
     document.body.classList.add('portfolio');
+    ReactGA.pageview('/');
     break;
 }
-
-ReactGA.pageview(window.location.pathname + window.location.search);
 //document.body.classList.add('bodyLoaded');
 
 
