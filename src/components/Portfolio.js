@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import RandomAnimations from './RandomAnimations.js';
 import { sample } from 'lodash';
 import Link from './Link.js';
+import ReactGA from 'react-ga';
+import splashlogo from '../img/splash_logo.png';
 
 
 export default class App extends Component{
@@ -79,12 +80,26 @@ export default class App extends Component{
     return <p style={{textAlign:"center",padding:0,margin:0,fontSize:'2em',color:'#324C7E'}}>.</p>;
   }
 
+  componentDidMount() {
+    ReactGA.initialize('UA-18240989-1', {
+      debug: true,
+      titleCase: false,
+      gaOptions: {
+        userId: 123
+      }
+    });
+  }
+
   render() {
     const _fontSize = '1.13em';
     return (
       <div className="App">
-        <div className={`Splash ${this.state.splash}`}>
-            <RandomAnimations />
+        <div className={`splash`}>
+          <img src={splashlogo} alt={`Dan Kinsley Web Developer Logo`}/>
+          <div className={`experience`} >
+            {this.addDecoration()}
+            <h1>Full Stack Developer,<br/>currently seeking<br/> a contract or<br/> full-time position.</h1>
+          </div>
         </div>
         <div className={`experience animated ${this.randomAnimation}`}>
           

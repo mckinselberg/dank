@@ -10,6 +10,7 @@
     "lodash": "^4.17.15",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "react-ga": "^3.3.0",
     "react-scripts": "3.3.0",
     "riteway": "^6.1.2",
     "save-dev": "0.0.1-security"
