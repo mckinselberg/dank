@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Link from './Link.js';
-import ReactGA from 'react-ga';
+//import ReactGA from 'react-ga';
 import splashlogo from '../img/splash_logo.png';
 
 
@@ -30,8 +30,8 @@ export default class App extends Component{
   }
 
   componentDidMount() {
-    ReactGA.initialize('UA-18240989-1');
-    ReactGA.pageview(window.location.pathname + window.location.search); 
+    //ReactGA.initialize('UA-18240989-1');
+    //ReactGA.pageview(window.location.pathname + window.location.search);
   }
 
   render() {

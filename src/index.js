@@ -12,9 +12,11 @@ import Tetris from './components/Tetris/Tetris';
 import SongPage from './components/SongPage/SongPage';
 import AudioPlayer from './components/AudioPlayer/AudioPlayerComponent';
 import qs from './utilities/qs';
+import ReactGA from 'react-ga';
 import * as serviceWorker from './serviceWorker';
 const loadTitle = document.title;
 //const winLocPathName = window.location.pathname.split('/');
+ReactGA.initialize('UA-18240989-1');
 
 const buildDiv = (id, component) => {
   let div = document.createElement('div');
@@ -74,6 +76,8 @@ switch(qs.p) {
     document.body.classList.add('portfolio');
     break;
 }
+
+ReactGA.pageview(window.location.pathname + window.location.search);
 //document.body.classList.add('bodyLoaded');
 
 
