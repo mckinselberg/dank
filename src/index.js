@@ -5,7 +5,7 @@ import './index.css';
 import './css/Portfolio.css';
 //import './css/animate.css';
 //Components
-import Portfolio from './components/Portfolio';
+import Portfolio from './components/Portfolio/Portfolio';
 import Mastermind from './components/Mastermind/Game';
 import Quotes from './components/Quotes/QuotesComponent';
 import Tetris from './components/Tetris/Tetris';
