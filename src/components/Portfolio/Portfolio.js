@@ -63,8 +63,8 @@ export default class App extends Component{
             {/* <Link name="Github" url="https://github.com/mckinselberg"/> */}
           </ul>
           {this.addDecoration()}
-          {<h2>Select Work Experience</h2>
-          /* <ul>
+          <h2>Select Work Experience</h2>
+          <ul>
             <Link name="AllianceBernstein/a" url="https://www.alliancebernstein.com/sites/campaign/theme/volatility/crisis-dashboard.htm"/>
             <Link name="AllianceBernstein/b" url="https://www.alliancebernstein.com/sites/campaign/theme/tech-and-innovation.htm?Seg=56"/>
             <Link name="AllianceBernstein/c" url="https://www.alliancebernstein.com/investments/us/retirement/collective-investment-trusts/home.htm"/>
@@ -73,7 +73,7 @@ export default class App extends Component{
             <Link name="Vintage Epicure" url="https://vintageepicure.com/"/>
             <Link name="Irwin Leighton" url="https://irwinleighton.com/"/>
             <Link name="Chista" url="https://www.chista.net"/>
-          </ul> */}
+          </ul>
           {this.addDecoration()}
           <h2>More Skills</h2>
           <p>
