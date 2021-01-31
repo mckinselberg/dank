@@ -37,7 +37,7 @@ export default function App() {
     return canv;
   }
   return(
-    <StaticRouter>
+    <BrowserRouter>
       <Switch>
         <Route path="/tetris">
         {() => {
@@ -68,6 +68,6 @@ export default function App() {
           <Portfolio />
         </Route>
       </Switch>
-    </StaticRouter>
+    </BrowserRouter>
   )
 }
