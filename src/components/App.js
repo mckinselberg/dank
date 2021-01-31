@@ -1,7 +1,8 @@
 import React from 'react';
 //import ReactDOM from 'react-dom';
 import {
-  BrowserRouter as Router,
+  BrowserRouter,
+  StaticRouter,
   Switch,
   Route,
   Link
@@ -36,7 +37,7 @@ export default function App() {
     return canv;
   }
   return(
-    <Router>
+    <StaticRouter>
       <Switch>
         <Route path="/tetris">
         {() => {
@@ -55,7 +56,7 @@ export default function App() {
           <Head title="Dan Kinsley's Mastermind. The classic game, made with React."/>
           <Mastermind />
         </Route>
-        <Route path="/music">
+        <Route path="/musicplayer">
           <Head title="Dan Kinsley's Audio Player"/>
           <AudioPlayer />
         </Route>
@@ -67,6 +68,6 @@ export default function App() {
           <Portfolio />
         </Route>
       </Switch>
-    </Router>
+    </StaticRouter>
   )
 }
