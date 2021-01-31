@@ -42,7 +42,7 @@ export default class App extends Component{
           <img src={splashlogo} alt={`Dan Kinsley Web Developer Logo`}/>
           <div className={`experience`} >
             {this.addDecoration()}
-            <h1>Seasoned Front-End Developer seeking work.</h1>
+            <h1>Seasoned Front-End Developer.</h1>
             <p></p>
           </div>
         </div>

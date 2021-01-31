@@ -83,8 +83,7 @@ export default class AudioPlayer extends Component{
       currentTime: null,
       songDuration: null
     }
-    this.musicFolder = 'music/'
-    this.audioElement = new Audio(`${this.musicFolder}${this.songs[0].url}`);
+    this.audioElement = new Audio(`${this.songs[0].url}`);
     this.audioElement.crossOrigin = 'anonymous';
   }
   
