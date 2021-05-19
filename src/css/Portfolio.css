@@ -49,6 +49,7 @@ body {
 }
 .experience p {
   margin: 0;
+  line-height: 1.4rem;
 }
 .experience ul {
   text-align: center;
