@@ -65,9 +65,10 @@ export default class App extends Component{
           {this.addDecoration()}
           <h2>Select Work Experience</h2>
           <ul>
-            <Link name="AllianceBernstein/a" url="https://www.alliancebernstein.com/sites/responsible-investing/home-en-gb.htm?seg=5&amp;lang=en-gb&amp;locale=gb"/>
-            <Link name="AllianceBernstein/b" url="https://www.alliancebernstein.com/sites/campaign/theme/tech-and-innovation.htm?Seg=56"/>
-            <Link name="AllianceBernstein/c" url="https://www.alliancebernstein.com/investments/us/retirement/collective-investment-trusts/home.htm"/>
+            <Link name="AllianceBernstein/a" url="https://www.alliancebernstein.com/sites/campaign/theme/volatility/crisis-dashboard.htm"/>
+            <Link name="AllianceBernstein/b" url="https://www.alliancebernstein.com/sites/responsible-investing/home-en-gb.htm?seg=5&amp;lang=en-gb&amp;locale=gb"/>
+            <Link name="AllianceBernstein/c" url="https://www.alliancebernstein.com/sites/campaign/theme/tech-and-innovation.htm?Seg=56"/>
+            <Link name="AllianceBernstein/d" url="https://www.alliancebernstein.com/investments/us/retirement/collective-investment-trusts/home.htm"/>
             <Link name="LPW Training Services" url="https://lpwtraining.com/"/>
             <Link name="Irwin Leighton" url="https://irwinleighton.com/"/>
             <Link name="Chista" url="https://www.chista.net"/>
