@@ -24,15 +24,15 @@ const Cats = ({ children }) => {
           updateCatArray([ ...catArray, response[0].url ]);
         }
       }).catch(console.error);
-  }, [catArray, clicks, fetchCat]);
+  }, [clicks]);
 
   useEffect(() => {
     updateLoading(!loading);
-  }, [clicks, loading]) 
+  }, [clicks]) 
   
   useEffect(() => {
     setTimeout(() => updateLoading(!loading), 500);
-  }, [cat, loading]);
+  }, [cat]);
 
   const [isVisible, toggleVisible] = useState(false);
   const handleClick = () => {
@@ -74,7 +74,7 @@ const Cats = ({ children }) => {
     <>
       <button onClick={handleClick}>click to see a cat</button>
       <animated.div style={{...divStyles,...moreStyles}} className='image-container'>
-        { loading ? <img src="./img/loading.gif" alt="loading" style={{ position:'absolute', zIndex: 1, opacity: ".6", width: '100%'}}/> : null }
+        { loading ? <img src="../img/loading.gif" alt="loading" style={{ position:'absolute', zIndex: 1, opacity: ".6", width: '100%'}}/> : null }
         { cat !== null ? <img src={cat} style={{width: '100%', maxWidth: '800px'}} alt="cat"/> : null }
         { children }
       </animated.div>

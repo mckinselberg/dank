@@ -1,5 +1,5 @@
 //Adam Quotes
-export default {
+const AdamQuotes = {
   "Results":[
     "None of my things are wired together.",
     "Denise went away for four days and I built a guitar. ",
@@ -24,3 +24,4 @@ export default {
     "I feel like my life can be divided up into before/after the day I found out about camels and emus."
   ]
 }
+export default AdamQuotes;

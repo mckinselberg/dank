@@ -1,5 +1,5 @@
 //Kate Quotes
-export default {
+const KateQuotes = {
   "Results":[
     "Dammit all my mushrooms are in Brooklyn what am I gonna do?",
     "<record scratch silence in a big crowd at Q’s dinner> “OH MY GOD SUCH GOOD MOUTHFEEL”",
@@ -21,7 +21,7 @@ export default {
     "I wish my WuTang name was Deviled Eggs"
   ]
 }
-
+export default KateQuotes;
 
 
 

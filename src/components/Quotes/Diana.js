@@ -1,5 +1,5 @@
 //Diana Quotes
-export default {
+const DianaQuotes = {
   "Results":[
     "They remind me of the unpomunprpnoinceable",
     "Well next time you should slip it in",
@@ -14,3 +14,4 @@ export default {
     `It’s more about the swinging demon dick`
   ]
 }
+export default DianaQuotes;

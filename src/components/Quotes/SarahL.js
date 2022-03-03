@@ -1,5 +1,5 @@
 //Sarah L Quotes
-export default {
+const SarahQuotes = {
   "Results":[
     "To Dan B: “Don’t talk about things you used to do it doesn’t make you cool.”",
     "So this is gonna sound weird but it seems like something you would pick up to play with.",
@@ -31,11 +31,4 @@ export default {
     "No no"
   ]
 }
-
-
-
-
-
-
-
-
+export default SarahQuotes;
