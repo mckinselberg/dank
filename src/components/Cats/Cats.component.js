@@ -72,7 +72,7 @@ const Cats = ({ children }) => {
 
   return (
     <>
-      <button className="cat-button" onClick={handleClick}>click to see a cat</button>
+      <button className="cat-button" onClick={handleClick}>click to see a{clicks > 0 ? 'nother' : ''} cat</button>
       <animated.div style={{...divStyles,...moreStyles}} className='image-container'>
         { loading ? <img src="../img/loading.gif" alt="loading" style={{ position:'absolute', zIndex: 1, opacity: ".6", width: '100%'}}/> : null }
         { cat !== null ? <img src={cat} style={{width: '100%', maxWidth: '800px'}} alt="cat"/> : null }
