@@ -225,6 +225,16 @@ button {
   transition: all 0.5s;
   cursor: pointer;
 }
+@media (max-width: 1023px) {
+  button.cat-button {
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    width: 200px;
+    margin-left: -100px;
+    z-index:100;
+  }
+}
 @media (hover: hover) {
   button:hover {
     background-color: white;
