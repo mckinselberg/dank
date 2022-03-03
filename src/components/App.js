@@ -12,13 +12,14 @@ import '../index.css';
 import '../css/Portfolio.css';
 //import './css/animate.css';
 //Components
+import Head from './Head/Head';
 import Portfolio from './Portfolio/Portfolio';
 import Mastermind from './Mastermind/Game';
 import Quotes from './Quotes/QuotesComponent';
 import Tetris from './Tetris/Tetris';
 import SongPage from './SongPage/SongPage';
 import AudioPlayer from './AudioPlayer/AudioPlayerComponent';
-import Head from './Head/Head';
+import Cats from './Cats/Cats.component';
 //import qs from './utilities/qs';
 import ReactGA from 'react-ga';
 
@@ -47,6 +48,10 @@ export default function App() {
           Tetris();
           return null
         }}
+        </Route>
+        <Route path="/cats">
+          <Head title="Click to See a Cat"/>
+          <Cats/>
         </Route>
         <Route path="/quotes">
           <Head title="Rob's Collected Quotes"/>
