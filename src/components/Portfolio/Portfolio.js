@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import Link from './Link.js';
-//import ReactGA from 'react-ga';
+// import Link from './Link.js';
+import ReactGA from 'react-ga';
 import splashlogo from './img/splash_logo.png';
 
 
@@ -30,23 +30,23 @@ export default class App extends Component{
   }
 
   componentDidMount() {
-    //ReactGA.initialize('UA-18240989-1');
-    //ReactGA.pageview(window.location.pathname + window.location.search);
+    ReactGA.initialize('UA-18240989-1');
+    ReactGA.pageview(window.location.pathname + window.location.search);
   }
 
   render() {
-    const _fontSize = '1.13em';
+    // const _fontSize = '1.13em';
     return (
       <div className="App">
         <div className={`splash`}>
           <img src={splashlogo} alt={`Dan Kinsley Web Developer Logo`}/>
           <div className={`experience`} >
-            {this.addDecoration()}
-            <h1>Seasoned Front-End Developer.</h1>
+            {/* {this.addDecoration()} */}
+            <h1>Software Engineer<br/>and<br/>Seasoned Full-Stack Developer</h1>
             <p></p>
           </div>
         </div>
-        <div className={`experience`}>
+        {/* <div className={`experience`}>
           {this.addDecoration()}
           <h2>Current Job Skillset</h2>
           <p>HTML, SCSS<br/>
@@ -60,7 +60,7 @@ export default class App extends Component{
           {this.addDecoration()}          
           <ul>
             <Link name="Resumé" url="/dan-kinsley-resume.pdf"/>
-            {/* <Link name="Github" url="https://github.com/mckinselberg"/> */}
+            <Link name="Github" url="https://github.com/mckinselberg"/>
           </ul>
           {this.addDecoration()}
           <h2>Select Work Experience</h2>
@@ -82,7 +82,7 @@ export default class App extends Component{
              and Administration<br/>
             <span style={{fontSize:_fontSize}}>G</span>raphic, Responsive, and Application Design.<br/>
           </p>
-        </div>
+        </div> */}
       </div>
     );
   }
