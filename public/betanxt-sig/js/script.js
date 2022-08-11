@@ -114,7 +114,7 @@ function showSuccess(input) {
 let clipboard;
 
 
-const inputArr = [
+const inputArrayForChecks = [
     firstNameForm,
     lastNameForm,
     functionForm,
@@ -125,7 +125,7 @@ const inputArr = [
 const checkRequiredOnSubmit = function () {
     let errors = [];
 
-    inputArr.forEach(function (input) {
+    inputArrayForChecks.forEach(function (input) {
         //trim removes white space
         if (input.value.trim() === '') {
             showError(input, `This field is required`);
@@ -153,7 +153,7 @@ const checkRequiredOnSubmit = function () {
 
 const checkRequiredOnChange = function () {
     let errors = [];
-    inputArr.forEach(function (input) {
+    inputArrayForChecks.forEach(function (input) {
         
         //trim removes white space
         if (input.value.trim() === '') {
@@ -222,7 +222,15 @@ deptOptions.forEach(function(deptOption) {
 
 // handle department dropdown changes
 departmentForm.addEventListener('change', function () {
-    departmentSig.innerHTML = departmentForm.value !== 'Other' ? departmentForm.value + '<br>' : departmentOtherForm.value + '<br>';
+    if (departmentForm.value === 'Other') {
+        departmentSig.innerHTML = departmentOtherForm.value + '<br>';
+        inputArrayForChecks.push(departmentOtherForm);
+    } else {
+        departmentSig.innerHTML = departmentForm.value + '<br>';
+        inputArrayForChecks.filter(function(input) {
+            input.id !== departmentOtherForm.id
+        })
+    }
     showSuccess(departmentForm);
 });
 
@@ -279,10 +287,14 @@ locationOptions.forEach(function(locationOption) {
 // handle office location dropdown changes
 officeLocationForm.addEventListener('change', function() {
     const cleanValue = officeLocationForm.value.replace('<b>','').replace('</b>','').replace('\n','');
-    if (cleanValue !== 'Other') {
-        officeLocationSig.innerHTML = officeLocationForm.value.split('\n').join('<br/>');
-    } else {
+    if (cleanValue === 'Other') {
         officeLocationSig.innerHTML = officeLocationOtherForm.value;
+        inputArrayForChecks.push(officeLocationOtherForm);
+    } else {
+        officeLocationSig.innerHTML = officeLocationForm.value.split('\n').join('<br/>');
+        inputArrayForChecks.filter(function(input) {
+            input.id !== officeLocationOtherForm.id
+        })
     }
     showSuccess(officeLocationForm);
 });
