@@ -264,7 +264,7 @@ div.error-text {
 .form_input.error div.error-text {
     color: red;
     visibility: visible;
-    margin-bottom:1rem;
+    margin-bottom:.8rem;
 }
 
 /* Preview */

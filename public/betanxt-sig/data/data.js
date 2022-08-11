@@ -22,7 +22,7 @@ const BetaNXTData = {
   ],
   links: {
     'website': 'https://www.betanxt.com',
-    'linkedin': 'https://www.linkedin.com/company/beta'
+    'linkedin': 'https://www.linkedin.com/company/betanxt'
   }
 }
 // use /n for a line break

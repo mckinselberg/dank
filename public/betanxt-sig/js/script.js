@@ -117,7 +117,6 @@ let clipboard;
 const inputArrayForChecks = [
     firstNameForm,
     lastNameForm,
-    functionForm,
     departmentForm,
     officeLocationForm
 ];
