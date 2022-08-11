@@ -250,7 +250,7 @@ input:focus {
     outline-color: var(--color-secondary-dark);
 }
 
-small {
+div.error-text {
     color: var(--color-secondary-light);
     font-size: 1rem;
     visibility: hidden;
@@ -261,9 +261,10 @@ small {
     border: 1px solid red;
 }
 
-.form_input.error small {
+.form_input.error div.error-text {
     color: red;
     visibility: visible;
+    margin-bottom:1rem;
 }
 
 /* Preview */
@@ -289,7 +290,7 @@ small {
     cursor: not-allowed;
 }
 .btn img {
-    margin-bottom: -4px;
+    margin-bottom: -8px;
 }
 
 .btn:focus {
