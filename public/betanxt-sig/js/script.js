@@ -84,7 +84,7 @@ const updateBtnText = function(btn) {
 }
 const btn = document.getElementById('btn');
 const btnImage = document.createElement('img');
-btnImage.src = "/img/content_copy_gm_grey_18dp.png";
+btnImage.src = "img/content_copy_gm_grey_18dp.png";
 const btnText = document.createTextNode(' Copy Signature');
 updateBtnText(btn);
 
