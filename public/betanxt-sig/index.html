@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta content="IE=edge" http-equiv="X-UA-Compatible">
+        <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no;" name="viewport">
+
+        <title>BetaNXT | Signature Generator</title>
+
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <div class="container">
+
+            <div class="left-container">
+                <!-- Input Form -->
+                <div class="header">
+                    <img src="img/betanxt-logo.png" alt="Logo van BetaNXT" class="logo" />
+                    <h1>E-mail signature builder</h1>
+                </div>
+                <div class="form-container">
+                    <form>
+                        <div class="form_fields">
+                            <label for="first_name">First Name* </label>
+                            <div class="form_input">
+                                <input type="text" id="firstName" name="first_name" placeholder="First Name" required="true" autofocus />
+                                <small>Error message</small>
+                            </div>
+                        </div>
+                        <div class="form_fields">
+                            <label for="last_name">Last Name *</label>
+                            <div class="form_input">
+                                <input type="text" id="lastName" name="last_name" placeholder="Last Name" required="true" />
+                                <small>Error message</small>
+                            </div>
+                        </div>
+                        <div class="form_fields">
+                            <label for="function">Functional Title</label>
+                            <div class="form_input">
+                                <input type="text" id="function" name="function" placeholder="Functional Title" />
+                                <small>Error message</small>
+                            </div>
+                        </div>
+                        <div class="form_fields">
+                            <label for="company">My Department *</label>
+                            <div class="form_input">
+                                <select id="departments" name="department" placeholder="Department" autocomplete="off" required="true">
+                                    <option value="" disabled selected>Select</option>
+                                </select>
+                                <small>Error message</small>
+                            </div>
+                        </div>
+                        <div class="form_fields">
+                            <label for="telephone">Office Phone</label>
+                            <div class="form_input">
+                                <input type="text" id="telephone" name="telephone" placeholder="Telephone number without international code" />
+                                <small>Error message</small>
+                            </div>
+                        </div>
+                        <div class="form_fields">
+                            <label for="mobile">Mobile Phone</label>
+                            <div class="form_input">
+                                <input type="text" id="mobile" name="mobile" placeholder="Mobile number without international code" />
+                                <small>Error message</small>
+                            </div>
+                        </div>
+                        <div class="form_fields">
+                            <label for="linkedIn">Personal LinkedIn</label>
+                            <div class="form_input">
+                                <input type="text" id="linkedIn" name="linkedIn" placeholder="Link to LinkedIn account" />
+                                <small>Error message</small>
+                            </div>
+                        </div>
+                        <div class="form_fields">
+                            <label for="officeLocation">My Office Location *</label>
+                            <div class="form_input">
+                                <select id="officeLocation" name="officeLocation" placeholder="My Office Location" autocomplete="off" required="true">
+                                    <option value="" disabled selected>Select</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div style="display:none">
+                            <input type="text" id="companyWebsiteForm" name="companyWebsiteForm" />
+                            <input type="text" id="companyLinkedInForm" name="companyLinkedInForm" />
+                        </div>
+
+                        <div style="display:none">
+                            <div class="form_fields">
+                                <label for="street">Street Address</label>
+                                <div class="form_input">
+                                    <input type="text" id="street" name="street" placeholder="Street Address" />
+                                    <small>Error message</small>
+                                </div>
+                            </div>
+                            
+                            <div class="form_fields">
+                                <label for="city">City</label>
+                                <div class="form_input">
+                                    <input type="text" id="city" name="city" placeholder="City" />
+                                    <small>Error message</small>
+                                </div>
+                            </div>
+                            <div class="form_fields">
+                                <label for="state">State</label>
+                                <div class="form_input">
+                                    <input type="text" id="state" name="state" placeholder="State" />
+                                    <small>Error message</small>
+                                </div>
+                            </div>
+                            <div class="form_fields">
+                                <label for="zip">Zip Code</label>
+                                <div class="form_input">
+                                    <input type="text" id="zip" name="zip" placeholder="Zip Code" />
+                                    <small>Error message</small>
+                                </div>
+                            </div>
+                            <div class="form_fields">
+                                <label for="country">Country</label>
+                                <div class="form_input">
+                                    <input type="text" id="country" name="country" placeholder="Country" />
+                                    <small>Error message</small>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                    <p class="required">* Denotes required entries</p>
+                </div>
+            </div>
+
+            <!-- Live preview -->
+            <div class="right-container">
+                <h3>Live Preview</h3>
+                <div class="preview-container">
+                    <div>
+                        <p>
+                            <span id="nameSig" style="font-weight: bold">Enter Information in the Form</span><br/>
+                       
+                            <span id="functionSig"></span><br/>
+                        
+                            <span id="departmentSig"></span><br/>
+                        
+                            <span id="telephoneSig"></span><br/>
+                        
+                            <span id="mobileSig"></span><br/>
+                        
+                            <span id="linkedInSig" style="color: #033c57; text-decoration: none; font-weight: bold"></span>
+                        </p>
+                    </div>
+                    <br/>
+                    <div>
+                        <p>
+                            <span id="officeLocationSig"></span>
+                        </p>
+                        
+                        <p style="display:none">
+                            <span id="streetSig">Street Address</span>
+                            <span id="citySig">City</span>, <span id="stateSig">State</span>, <span id="zipSig">Zip Code</span>, <span id="countrySig">Country</span>
+                        </p>
+    
+                        <p>
+                            <span id="companyWebsiteSig" style="color: #033c57; text-decoration: none; font-weight: bold">
+                            </span>
+                            <br/>
+                            <span id="companyLinkedinSig" style="color: #033c57; text-decoration: none; font-weight: bold">
+                            </span>
+                        </p>
+                    </div>
+
+                </div>
+                <!-- Button -->
+                <div class="button-container">
+                    <button id="btn" class="btn disabled" data-clipboard-text="">Copy signature</button>
+                    <p class="notice">For any issues, please contact the support desk at <a href="mailto:IT-Support@BetaNXT.com" style="font-weight: bold;">IT-Support@BetaNXT.com</a></p>
+                </div>
+            </div>
+        </div>
+        <script src="clipboard.min.js"></script>
+        <script src="data.js"></script>
+        <script src="script.js"></script>
+    </body>
+</html>
