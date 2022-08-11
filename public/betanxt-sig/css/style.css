@@ -16,6 +16,7 @@
 
 * {
     box-sizing: border-box;
+    transition:ease all .25s;
 }
 
 html {
@@ -165,12 +166,12 @@ h4 {
 
 p.required {
     font-style: italic;
-    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 a {
     color: var(--color-primary);
-    white-space: no-wrap;
+    white-space: nowrap;
 }
 
 /* Form */
@@ -254,6 +255,7 @@ small {
     color: var(--color-secondary-light);
     font-size: 1rem;
     visibility: hidden;
+    line-height: 1.7rem;
 }
 
 .form_input.error input {
@@ -286,6 +288,9 @@ small {
 .btn.disabled {
     background-color: gray;
     cursor: not-allowed;
+}
+.btn img {
+    margin-bottom: -4px;
 }
 
 .btn:focus {

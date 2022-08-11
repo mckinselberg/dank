@@ -4,7 +4,7 @@ const firstNameForm = document.getElementById('firstName');
 const lastNameForm = document.getElementById('lastName');
 const functionForm = document.getElementById('function');
 const departmentForm = document.getElementById('departments');
-const deptOtherForm = document.getElementById('departmentsOther');
+const departmentOtherForm = document.getElementById('departmentsOther');
 const officeLocationForm = document.getElementById('officeLocation');
 const officeLocationOtherForm = document.getElementById('officeLocationOther');
 const telephoneForm = document.getElementById('telephone');
@@ -22,21 +22,12 @@ const betaNXTLinkedIn = BetaNXTData.links.linkedin !== undefined ? BetaNXTData.l
 companyWebsiteForm.value = betaNXTWebsite; 
 companyLinkedInForm.value = betaNXTLinkedIn;
 
-//Selectors for live preview
-const nameSig = document.getElementById('nameSig');
-const functionSig = document.getElementById('functionSig');
-const departmentSig = document.getElementById('departmentSig');
-const officeLocationSig = document.getElementById('officeLocationSig');
-const telephoneSig = document.getElementById('telephoneSig');
-const mobileSig = document.getElementById('mobileSig');
-const linkedInSig = document.getElementById('linkedInSig');
-
 const inputArray = [
     firstNameForm,
     lastNameForm,
     functionForm,
     departmentForm,
-    deptOtherForm,
+    departmentOtherForm,
     telephoneForm,
     mobileForm,
     linkedInForm,
@@ -48,16 +39,13 @@ const inputArray = [
 
 let inputObj = {};
 
-const btn = document.getElementById('btn');
-
+// create input object
 inputArray.forEach(input => {
     inputObj[input.id] = input.value;
     input.addEventListener('change', () => {
-
+        checkRequiredOnChange();
         document.getElementById('companyWebsiteSig').innerHTML = betaNXTWebsite;
         document.getElementById('companyLinkedinSig').innerHTML = betaNXTLinkedIn;
-
-        checkRequired();
         inputObj[input.id] = input.value;
         const clipboardText = Object.keys(inputObj).reduce(function(accumulator, b) {
             switch(b) {
@@ -65,16 +53,21 @@ inputArray.forEach(input => {
                     return accumulator + inputObj[b] + ' ';
                 case 'lastName':
                     return accumulator + inputObj[b] + '\n';
-                case 'linkedIn':
-                    return (inputObj[b] !== '' ? (accumulator + 'https://linkedin.com/' + inputObj[b] + '\n') : accumulator) + '\n';
-                case 'officeLocation':
-                    return (inputObj[b] !== '' ? (accumulator + inputObj[b].replace('<b>','').replace('</b>','') + '\n') : accumulator);
                 case 'departments':
                     return (inputObj[b] !== '' && inputObj[b] !== 'Other' ? (accumulator + inputObj[b] + '\n') : accumulator);
+                case 'departmentsOther':
+                    return departmentForm.value === 'Other' ? (inputObj[b] !== '' ? (accumulator + inputObj[b] + '\n') : accumulator) : accumulator;
                 case 'telephone':
-                    return (inputObj[b] !== '' ? (accumulator + 'O: ' + inputObj[b] + '\n') : accumulator)
+                    return (inputObj[b] !== '' ? (accumulator + 'O: ' + inputObj[b] + '\n') : accumulator);
                 case 'mobile':
-                    return (inputObj[b] !== '' ? (accumulator + 'M: ' + inputObj[b] + '\n') : accumulator)
+                    return (inputObj[b] !== '' ? (accumulator + 'M: ' + inputObj[b] + '\n') : accumulator);
+                case 'linkedIn':
+                    return (inputObj[b] !== '' ? (accumulator + inputObj[b] + '\n') : accumulator) + '\n';
+                case 'officeLocation':
+                    const inputObjBCleaned = inputObj[b].replace('<b>','').replace('</b>','').split('\n').join('');
+                    return (inputObj[b] !== '' && inputObjBCleaned !== 'Other' ? (accumulator + inputObj[b].replace('<b>','').replace('</b>','') + '\n') : accumulator);
+                case 'officeLocationOther':
+                    return officeLocationForm.value.replace('<b>', '').replace('</b>','').split('\n').join('') === 'Other' ? (inputObj[b] !== '' ? (accumulator + inputObj[b] + '\n') : accumulator) : accumulator;
                 default:
                     return (inputObj[b] !== '' ? (accumulator + inputObj[b] + '\n') : accumulator);
             }
@@ -82,6 +75,27 @@ inputArray.forEach(input => {
         btn.dataset.clipboardText = clipboardText;
     });
 });
+
+// button
+const updateBtnText = function(btn) {
+    btn.innerHTML = '';
+    btn.appendChild(btnImage);
+    btn.appendChild(btnText)
+}
+const btn = document.getElementById('btn');
+const btnImage = document.createElement('img');
+btnImage.src = "/img/content_copy_gm_grey_18dp.png";
+const btnText = document.createTextNode(' Copy Signature');
+updateBtnText(btn);
+
+//Selectors for live preview
+const nameSig = document.getElementById('nameSig');
+const functionSig = document.getElementById('functionSig');
+const departmentSig = document.getElementById('departmentSig');
+const officeLocationSig = document.getElementById('officeLocationSig');
+const telephoneSig = document.getElementById('telephoneSig');
+const mobileSig = document.getElementById('mobileSig');
+const linkedInSig = document.getElementById('linkedInSig');
 
 //Show input error message
 const showError = function (input, message) {
@@ -97,17 +111,19 @@ function showSuccess(input) {
     formControl.className = 'form_input success';
 }
 
-let clipboard = new ClipboardJS('.btn');
-//Check required fields
-const checkRequired = function () {
-    let errors = [];
+let clipboard;
 
-    const inputArr = [
-        firstNameForm,
-        lastNameForm,
-        functionForm,
-        departmentForm,
-    ];
+
+const inputArr = [
+    firstNameForm,
+    lastNameForm,
+    functionForm,
+    departmentForm,
+    officeLocationForm
+];
+//Check required fields
+const checkRequiredOnSubmit = function () {
+    let errors = [];
 
     inputArr.forEach(function (input) {
         //trim removes white space
@@ -121,19 +137,40 @@ const checkRequired = function () {
 
     if (errors.length > 0) {
         btn.classList.add('disabled');
-        clipboard.destroy();
     } else {
         btn.classList.remove('disabled');
         clipboard = new ClipboardJS('.btn');
         clipboard.on('success', function(e) {
             console.log(btn.dataset.clipboardText)
-            btn.innerHTML = 'Signature Copied';
+            btn.innerHTML = 'Copied';
             setTimeout(function() {
-                btn.innerHTML = 'Copy Signature';
-            }, 3000);
+                updateBtnText(btn)
+            }, 1500);
+            clipboard.destroy();
         });
     }
 };
+
+const checkRequiredOnChange = function () {
+    let errors = [];
+    inputArr.forEach(function (input) {
+        
+        //trim removes white space
+        if (input.value.trim() === '') {
+            errors.push('error');
+        }
+
+        if (errors.length > 0) {
+            btn.classList.add('disabled');
+        } else {
+            btn.classList.remove('disabled');
+        }
+    });
+}
+
+btn.addEventListener('click', function() {
+    checkRequiredOnSubmit();
+})
 
 //Generate name
 const fullNameGen = function () {
@@ -169,52 +206,8 @@ lastNameForm.addEventListener('keyup', function () {
 });
 
 functionForm.addEventListener('keyup', function () {
-    functionSig.textContent = functionForm.value;
+    functionSig.innerHTML = functionForm.value !== '' ? functionForm.value + '<br>' : '';
     showSuccess(functionForm);
-});
-
-departmentForm.addEventListener('change', function () {
-    departmentSig.innerHTML = departmentForm.value !== 'Other' ? departmentForm.value : deptOtherForm.value;
-    showSuccess(departmentForm);
-});
-
-deptOtherForm.addEventListener('keyup', function () {
-    departmentSig.innerHTML = departmentForm.value === 'Other' ? deptOtherForm.value : '';
-    showSuccess(departmentForm);
-})
-
-officeLocationForm.addEventListener('change', function() {
-    const cleanValue = officeLocationForm.value.replace('<b>','').replace('</b>','').replace('\n','');
-    officeLocationSig.innerHTML = cleanValue !== 'Other' ? officeLocationForm.value.split('\n').join('<br/>') : '';
-});
-
-officeLocationOtherForm.addEventListener('keyup', function() {
-    const cleanValue = officeLocationForm.value.replace('<b>','').replace('</b>','').replace('\n','');
-    officeLocationSig.innerHTML = cleanValue === 'Other' ? officeLocationOtherForm.value : '';
-    showSuccess(officeLocationForm)
-})
-
-telephoneForm.addEventListener('keyup', function () {
-    if (telephoneForm.value.length > 0) {
-        telephoneSig.innerHTML = 'O: ' + telephoneForm.value;
-    } else {
-        telephoneSig.innerHTML = '';
-    }
-    showSuccess(telephoneForm);
-});
-
-mobileForm.addEventListener('keyup', function () {
-    if (mobileForm.value.length > 0) {
-        mobileSig.innerHTML = 'M: ' + mobileForm.value;
-    } else {
-        mobileSig.innerHTML = '';
-    }
-    showSuccess(mobileForm);
-});
-
-linkedInForm.addEventListener('keyup', function () {
-    linkedInSig.innerHTML = linkedInForm.value !== '' ? 'https://linkedin.com/' + linkedInForm.value : '';
-    // showSuccess(linkedinForm);
 });
 
 // populate department dropdowns
@@ -227,6 +220,18 @@ deptOptions.forEach(function(deptOption) {
     departmentsSelect.appendChild(opt);
 });
 
+// handle department dropdown changes
+departmentForm.addEventListener('change', function () {
+    departmentSig.innerHTML = departmentForm.value !== 'Other' ? departmentForm.value + '<br>' : departmentOtherForm.value + '<br>';
+    showSuccess(departmentForm);
+});
+
+// handle department other changes
+departmentOtherForm.addEventListener('keyup', function () {
+    departmentSig.innerHTML = departmentForm.value === 'Other' ? departmentOtherForm.value + '<br>' : '';
+    showSuccess(departmentForm);
+});
+
 // handle department other selection
 const deptOtherContainer = document.getElementById('deptOtherContainer');
 departmentsSelect.addEventListener('change', function(e) {
@@ -237,15 +242,60 @@ departmentsSelect.addEventListener('change', function(e) {
     }
 });
 
+telephoneForm.addEventListener('keyup', function () {
+    if (telephoneForm.value.length > 0) {
+        telephoneSig.innerHTML = 'O: ' + telephoneForm.value + '<br>';
+    } else {
+        telephoneSig.innerHTML = '';
+    }
+    // showSuccess(telephoneForm);
+});
+
+mobileForm.addEventListener('keyup', function () {
+    if (mobileForm.value.length > 0) {
+        mobileSig.innerHTML = 'M: ' + mobileForm.value + '<br>';
+    } else {
+        mobileSig.innerHTML = '';
+    }
+    // showSuccess(mobileForm);
+});
+
+linkedInForm.addEventListener('keyup', function () {
+    linkedInSig.innerHTML = linkedInForm.value !== '' ? linkedInForm.value : '';
+    // showSuccess(linkedinForm);
+});
+
 // populate location dropdowns
 const locationsSelect = document.getElementById('officeLocation');
 const locationOptions = BetaNXTData.locations;
 locationOptions.forEach(function(locationOption) {
     const opt = document.createElement('option');
     opt.value = '<b>' + Object.keys(locationOption) + '</b>' + '\n' + Object.values(locationOption);
-    const innerHtml =  Object.keys(locationOption) + ' \n ' + Object.values(locationOption);
-    opt.innerHTML =  innerHtml.split('\n').join('<br/>');
+    let innerHtml =  Object.keys(locationOption) + (opt.value !== '<b>Other</b>\n' ? ', ' : '') + Object.values(locationOption);
+    opt.innerHTML =  innerHtml.split('\n').join(', ');
     locationsSelect.appendChild(opt);
+});
+
+// handle office location dropdown changes
+officeLocationForm.addEventListener('change', function() {
+    const cleanValue = officeLocationForm.value.replace('<b>','').replace('</b>','').replace('\n','');
+    if (cleanValue !== 'Other') {
+        officeLocationSig.innerHTML = officeLocationForm.value.split('\n').join('<br/>');
+    } else {
+        officeLocationSig.innerHTML = officeLocationOtherForm.value;
+    }
+    showSuccess(officeLocationForm);
+});
+
+// handle location other changes
+officeLocationOtherForm.addEventListener('keyup', function() {
+    const cleanValue = officeLocationForm.value.replace('<b>','').replace('</b>','').replace('\n','');
+    if (cleanValue === 'Other') {
+        officeLocationSig.innerHTML = officeLocationOtherForm.value;
+    } else {
+        officeLocationSig.innerHTML = '';
+    }
+    showSuccess(officeLocationForm);
 });
 
 // handle location other selection
@@ -264,12 +314,12 @@ locationsSelect.addEventListener('change', function(e) {
 
 
 
+
 // phone
-window.intlTelInput(telephoneForm, {
-  // any initialisation options go here
-});
-window.intlTelInput(mobileForm, {
-    // any initialisation options go here
-  });
-  
+// window.intlTelInput(telephoneForm, {
+//   // any initialisation options go here
+// });
+// window.intlTelInput(mobileForm, {
+//     // any initialisation options go here
+// });
 
