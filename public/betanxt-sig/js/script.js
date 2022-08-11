@@ -1,18 +1,12 @@
 'use strict';
-
-
-
 //Selectors for form
 const firstNameForm = document.getElementById('firstName');
 const lastNameForm = document.getElementById('lastName');
 const functionForm = document.getElementById('function');
 const departmentForm = document.getElementById('departments');
+const deptOtherForm = document.getElementById('departmentsOther');
 const officeLocationForm = document.getElementById('officeLocation');
-// const streetForm = document.getElementById('street');
-// const cityForm = document.getElementById('city');
-// const stateForm = document.getElementById('state');
-// const zipForm = document.getElementById('zip');
-// const countryForm = document.getElementById('country');
+const officeLocationOtherForm = document.getElementById('officeLocationOther');
 const telephoneForm = document.getElementById('telephone');
 const mobileForm = document.getElementById('mobile');
 const linkedInForm = document.getElementById('linkedIn');
@@ -24,6 +18,7 @@ const companyLinkedInForm = document.getElementById('companyLinkedInForm');
 const betaNXTWebsite =  BetaNXTData.links.website !== undefined ? BetaNXTData.links.website : '';
 const betaNXTLinkedIn = BetaNXTData.links.linkedin !== undefined ? BetaNXTData.links.linkedin : '';
 
+// assign values to inputs
 companyWebsiteForm.value = betaNXTWebsite; 
 companyLinkedInForm.value = betaNXTLinkedIn;
 
@@ -32,30 +27,21 @@ const nameSig = document.getElementById('nameSig');
 const functionSig = document.getElementById('functionSig');
 const departmentSig = document.getElementById('departmentSig');
 const officeLocationSig = document.getElementById('officeLocationSig');
-// const streetSig = document.getElementById('streetSig');
-// const citySig = document.getElementById('citySig');
-// const stateSig = document.getElementById('stateSig');
-// const zipSig = document.getElementById('zipSig');
-// const countrySig = document.getElementById('countrySig');
 const telephoneSig = document.getElementById('telephoneSig');
 const mobileSig = document.getElementById('mobileSig');
 const linkedInSig = document.getElementById('linkedInSig');
-
 
 const inputArray = [
     firstNameForm,
     lastNameForm,
     functionForm,
     departmentForm,
-    // streetForm,
-    // cityForm,
-    // stateForm,
-    // zipForm,
-    // countryForm,
+    deptOtherForm,
     telephoneForm,
     mobileForm,
     linkedInForm,
     officeLocationForm,
+    officeLocationOtherForm,
     companyWebsiteForm,
     companyLinkedInForm
 ];
@@ -83,6 +69,12 @@ inputArray.forEach(input => {
                     return (inputObj[b] !== '' ? (accumulator + 'https://linkedin.com/' + inputObj[b] + '\n') : accumulator) + '\n';
                 case 'officeLocation':
                     return (inputObj[b] !== '' ? (accumulator + inputObj[b].replace('<b>','').replace('</b>','') + '\n') : accumulator);
+                case 'departments':
+                    return (inputObj[b] !== '' && inputObj[b] !== 'Other' ? (accumulator + inputObj[b] + '\n') : accumulator);
+                case 'telephone':
+                    return (inputObj[b] !== '' ? (accumulator + 'O: ' + inputObj[b] + '\n') : accumulator)
+                case 'mobile':
+                    return (inputObj[b] !== '' ? (accumulator + 'M: ' + inputObj[b] + '\n') : accumulator)
                 default:
                     return (inputObj[b] !== '' ? (accumulator + inputObj[b] + '\n') : accumulator);
             }
@@ -167,31 +159,42 @@ const formatPhone = function (numberInput) {
     }
 };
 
-
 //Event listeners for live preview
-firstNameForm.addEventListener('input', function () {
+firstNameForm.addEventListener('keyup', function () {
     fullNameGen();
 });
 
-lastNameForm.addEventListener('input', function () {
+lastNameForm.addEventListener('keyup', function () {
     fullNameGen();
 });
 
-functionForm.addEventListener('input', function () {
+functionForm.addEventListener('keyup', function () {
     functionSig.textContent = functionForm.value;
     showSuccess(functionForm);
 });
 
 departmentForm.addEventListener('change', function () {
-    departmentSig.innerHTML = departmentForm.value;
+    departmentSig.innerHTML = departmentForm.value !== 'Other' ? departmentForm.value : deptOtherForm.value;
     showSuccess(departmentForm);
 });
 
+deptOtherForm.addEventListener('keyup', function () {
+    departmentSig.innerHTML = departmentForm.value === 'Other' ? deptOtherForm.value : '';
+    showSuccess(departmentForm);
+})
+
 officeLocationForm.addEventListener('change', function() {
-    officeLocationSig.innerHTML = officeLocationForm.value.split('\n').join('<br/>');
+    const cleanValue = officeLocationForm.value.replace('<b>','').replace('</b>','').replace('\n','');
+    officeLocationSig.innerHTML = cleanValue !== 'Other' ? officeLocationForm.value.split('\n').join('<br/>') : '';
 });
 
-telephoneForm.addEventListener('input', function () {
+officeLocationOtherForm.addEventListener('keyup', function() {
+    const cleanValue = officeLocationForm.value.replace('<b>','').replace('</b>','').replace('\n','');
+    officeLocationSig.innerHTML = cleanValue === 'Other' ? officeLocationOtherForm.value : '';
+    showSuccess(officeLocationForm)
+})
+
+telephoneForm.addEventListener('keyup', function () {
     if (telephoneForm.value.length > 0) {
         telephoneSig.innerHTML = 'O: ' + telephoneForm.value;
     } else {
@@ -200,7 +203,7 @@ telephoneForm.addEventListener('input', function () {
     showSuccess(telephoneForm);
 });
 
-mobileForm.addEventListener('input', function () {
+mobileForm.addEventListener('keyup', function () {
     if (mobileForm.value.length > 0) {
         mobileSig.innerHTML = 'M: ' + mobileForm.value;
     } else {
@@ -209,56 +212,64 @@ mobileForm.addEventListener('input', function () {
     showSuccess(mobileForm);
 });
 
-linkedInForm.addEventListener('input', function () {
+linkedInForm.addEventListener('keyup', function () {
     linkedInSig.innerHTML = linkedInForm.value !== '' ? 'https://linkedin.com/' + linkedInForm.value : '';
     // showSuccess(linkedinForm);
 });
 
-// populate select dropdowns
-const depts = document.getElementById('departments');
+// populate department dropdowns
+const departmentsSelect = document.getElementById('departments');
 const deptOptions = BetaNXTData.departments;
 deptOptions.forEach(function(deptOption) {
     const opt = document.createElement('option');
     opt.value = deptOption;
     opt.innerHTML = deptOption;
-    depts.appendChild(opt);
+    departmentsSelect.appendChild(opt);
+});
+
+// handle department other selection
+const deptOtherContainer = document.getElementById('deptOtherContainer');
+departmentsSelect.addEventListener('change', function(e) {
+    if (e.target.value === 'Other') {
+        deptOtherContainer.classList.remove('hidden');
+    } else {
+        deptOtherContainer.classList.add('hidden');
+    }
 });
 
 // populate location dropdowns
 const locationsSelect = document.getElementById('officeLocation');
 const locationOptions = BetaNXTData.locations;
-Object.keys(locationOptions).forEach(function(locationOption) {
+locationOptions.forEach(function(locationOption) {
     const opt = document.createElement('option');
-    opt.value = '<b>' + locationOption + '</b>' + '\n' + locationOptions[locationOption];
-    const innerHtml = locationOption + '\n' + locationOptions[locationOption];
+    opt.value = '<b>' + Object.keys(locationOption) + '</b>' + '\n' + Object.values(locationOption);
+    const innerHtml =  Object.keys(locationOption) + ' \n ' + Object.values(locationOption);
     opt.innerHTML =  innerHtml.split('\n').join('<br/>');
     locationsSelect.appendChild(opt);
 });
 
+// handle location other selection
+const locationOtherContainer = document.getElementById('officeLocationOtherContainer');
+locationsSelect.addEventListener('change', function(e) {
+    const cleanValue = e.target.value
+        .replace('<b>','')
+        .replace('</b>','')
+        .replace('\n','');
+    if (cleanValue === 'Other') {
+        locationOtherContainer.classList.remove('hidden');
+    } else {
+        locationOtherContainer.classList.add('hidden');
+    }
+});
 
 
 
-// streetForm.addEventListener('input', function () {
-//     streetSig.textContent = streetForm.value;
-//     showSuccess(streetForm);
-// });
+// phone
+window.intlTelInput(telephoneForm, {
+  // any initialisation options go here
+});
+window.intlTelInput(mobileForm, {
+    // any initialisation options go here
+  });
+  
 
-// cityForm.addEventListener('input', function () {
-//     citySig.textContent = cityForm.value;
-//     showSuccess(cityForm);
-// });
-
-// stateForm.addEventListener('input', function () {
-//     stateSig.textContent = stateForm.value;
-//     showSuccess(stateForm);
-// });
-
-// zipForm.addEventListener('input', function () {
-//     zipSig.textContent = zipForm.value;
-//     showSuccess(zipForm);
-// });
-
-// countryForm.addEventListener('input', function () {
-//     countrySig.textContent = countryForm.value;
-//     showSuccess(countryForm);
-// });

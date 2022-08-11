@@ -9,7 +9,8 @@
 
         <title>BetaNXT | Signature Generator</title>
 
-        <link rel="stylesheet" href="style.css" />
+        <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="lib/phone/css/intlTelInput.min.css" />
     </head>
     <body>
         <div class="container">
@@ -44,7 +45,7 @@
                             </div>
                         </div>
                         <div class="form_fields">
-                            <label for="company">My Department *</label>
+                            <label for="department">My Department *</label>
                             <div class="form_input">
                                 <select id="departments" name="department" placeholder="Department" autocomplete="off" required="true">
                                     <option value="" disabled selected>Select</option>
@@ -52,17 +53,24 @@
                                 <small>Error message</small>
                             </div>
                         </div>
+                        <div class="form_fields hidden" id="deptOtherContainer">
+                            <label id="departmentsOtherLabel" for="departmentsOther">Department Other *</label>
+                            <div class="form_input">
+                                <input type="text" id="departmentsOther" name="departmentsOther" />
+                                <small>Error message</small>
+                            </div>
+                        </div>
                         <div class="form_fields">
                             <label for="telephone">Office Phone</label>
                             <div class="form_input">
-                                <input type="text" id="telephone" name="telephone" placeholder="Telephone number without international code" />
+                                <input type="tel" id="telephone" name="telephone" placeholder="Telephone number without international code" />
                                 <small>Error message</small>
                             </div>
                         </div>
                         <div class="form_fields">
                             <label for="mobile">Mobile Phone</label>
                             <div class="form_input">
-                                <input type="text" id="mobile" name="mobile" placeholder="Mobile number without international code" />
+                                <input type="tel" id="mobile" name="mobile" placeholder="Mobile number without international code" />
                                 <small>Error message</small>
                             </div>
                         </div>
@@ -79,6 +87,15 @@
                                 <select id="officeLocation" name="officeLocation" placeholder="My Office Location" autocomplete="off" required="true">
                                     <option value="" disabled selected>Select</option>
                                 </select>
+                                <small>Error message</small>
+                            </div>
+                        </div>
+                        
+                        <div class="form_fields hidden" id="officeLocationOtherContainer">
+                            <label id="officeLocationOtherLabel" for="officeLocationOther">Office Loaction Other *</label>
+                            <div class="form_input">
+                                <input type="text" id="officeLocationOther" name="officeLocationOther" />
+                                <small>Error message</small>
                             </div>
                         </div>
                         
@@ -160,7 +177,7 @@
                             <span id="streetSig">Street Address</span>
                             <span id="citySig">City</span>, <span id="stateSig">State</span>, <span id="zipSig">Zip Code</span>, <span id="countrySig">Country</span>
                         </p>
-    
+
                         <p>
                             <span id="companyWebsiteSig" style="color: #033c57; text-decoration: none; font-weight: bold">
                             </span>
@@ -178,8 +195,9 @@
                 </div>
             </div>
         </div>
-        <script src="clipboard.min.js"></script>
-        <script src="data.js"></script>
-        <script src="script.js"></script>
+        <script src="lib/clipboard.min.js"></script>
+        <!-- <script src="lib/phone/js/intlTelInput.min.js"></script> -->
+        <script src="data/data.js"></script>
+        <script src="js/script.js"></script>
     </body>
 </html>
