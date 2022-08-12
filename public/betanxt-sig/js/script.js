@@ -256,7 +256,8 @@ telephoneForm.addEventListener('keyup', function () {
     } else {
         telephoneSig.innerHTML = '';
     }
-    // showSuccess(telephoneForm);
+    // console.log(itiPhone.getNumber(telephoneForm.value));
+    // console.log(itiPhone);
 });
 
 mobileForm.addEventListener('keyup', function () {
@@ -265,7 +266,6 @@ mobileForm.addEventListener('keyup', function () {
     } else {
         mobileSig.innerHTML = '';
     }
-    // showSuccess(mobileForm);
 });
 
 linkedInForm.addEventListener('keyup', function () {
@@ -326,8 +326,15 @@ locationsSelect.addEventListener('change', function(e) {
 
 
 // phone
-// window.intlTelInput(telephoneForm, {
+// let itiPhone = window.intlTelInput(telephoneForm, {
 //   // any initialisation options go here
+//   utilsScript: 'lib/phone/js/utils.js',
+//   formatOnDisplay: true,
+//   autoPlaceholder: 'polite',
+//   nationalMode: true,
+//   preferredCountries: ['us','in','gb'],
+// //   separateDialCode: true,
+
 // });
 // window.intlTelInput(mobileForm, {
 //     // any initialisation options go here
