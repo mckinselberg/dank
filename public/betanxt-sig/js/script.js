@@ -64,10 +64,10 @@ inputArray.forEach(input => {
                 case 'linkedIn':
                     return (inputObj[b] !== '' ? (accumulator + inputObj[b] + '\n') : accumulator) + '\n';
                 case 'officeLocation':
-                    const inputObjBCleaned = inputObj[b].replace('<b>','').replace('</b>','').split('\n').join('');
-                    return (inputObj[b] !== '' && inputObjBCleaned !== 'Other' ? (accumulator + inputObj[b].replace('<b>','').replace('</b>','') + '\n') : accumulator);
+                    const inputObjBCleaned = inputObj[b].split('\n').join('');
+                    return (inputObj[b] !== '' && inputObjBCleaned !== 'Other' ? (accumulator + inputObj[b] + '\n') : accumulator);
                 case 'officeLocationOther':
-                    return officeLocationForm.value.replace('<b>', '').replace('</b>','').split('\n').join('') === 'Other' ? (inputObj[b] !== '' ? (accumulator + inputObj[b] + '\n') : accumulator) : accumulator;
+                    return officeLocationForm.value.split('\n').join('') === 'Other' ? (inputObj[b] !== '' ? (accumulator + inputObj[b] + '\n') : accumulator) : accumulator;
                 default:
                     return (inputObj[b] !== '' ? (accumulator + inputObj[b] + '\n') : accumulator);
             }
@@ -198,15 +198,16 @@ const formatPhone = function (numberInput) {
 //Event listeners for live preview
 firstNameForm.addEventListener('keyup', function () {
     fullNameGen();
+    showSuccess(firstNameForm);
 });
 
 lastNameForm.addEventListener('keyup', function () {
     fullNameGen();
+    showSuccess(lastNameForm);
 });
 
 functionForm.addEventListener('keyup', function () {
     functionSig.innerHTML = functionForm.value !== '' ? functionForm.value + '<br>' : '';
-    showSuccess(functionForm);
 });
 
 // populate department dropdowns
@@ -277,15 +278,15 @@ const locationsSelect = document.getElementById('officeLocation');
 const locationOptions = BetaNXTData.locations;
 locationOptions.forEach(function(locationOption) {
     const opt = document.createElement('option');
-    opt.value = '<b>' + Object.keys(locationOption) + '</b>' + '\n' + Object.values(locationOption);
-    let innerHtml =  Object.keys(locationOption) + (opt.value !== '<b>Other</b>\n' ? ', ' : '') + Object.values(locationOption);
+    opt.value = Object.keys(locationOption) + '\n' + Object.values(locationOption);
+    let innerHtml =  Object.keys(locationOption) + (opt.value !== 'Other\n' ? ', ' : '') + Object.values(locationOption);
     opt.innerHTML =  innerHtml.split('\n').join(', ');
     locationsSelect.appendChild(opt);
 });
 
 // handle office location dropdown changes
 officeLocationForm.addEventListener('change', function() {
-    const cleanValue = officeLocationForm.value.replace('<b>','').replace('</b>','').replace('\n','');
+    const cleanValue = officeLocationForm.value.replace('\n','');
     if (cleanValue === 'Other') {
         officeLocationSig.innerHTML = officeLocationOtherForm.value;
         inputArrayForChecks.push(officeLocationOtherForm);
@@ -301,7 +302,7 @@ officeLocationForm.addEventListener('change', function() {
 
 // handle location other changes
 officeLocationOtherForm.addEventListener('keyup', function() {
-    const cleanValue = officeLocationForm.value.replace('<b>','').replace('</b>','').replace('\n','');
+    const cleanValue = officeLocationForm.value.replace('\n','');
     if (cleanValue === 'Other') {
         officeLocationSig.innerHTML = officeLocationOtherForm.value;
     } else {
@@ -313,10 +314,7 @@ officeLocationOtherForm.addEventListener('keyup', function() {
 // handle location other selection
 const locationOtherContainer = document.getElementById('officeLocationOtherContainer');
 locationsSelect.addEventListener('change', function(e) {
-    const cleanValue = e.target.value
-        .replace('<b>','')
-        .replace('</b>','')
-        .replace('\n','');
+    const cleanValue = e.target.value.replace('\n','');
     if (cleanValue === 'Other') {
         locationOtherContainer.classList.remove('hidden');
     } else {
