@@ -61,16 +61,23 @@
                             </div>
                         </div>
                         <div class="form_fields">
-                            <label for="telephone">Office Phone</label>
+                            <label for="telephone">Work Phone</label>
                             <div class="form_input">
-                                <input type="tel" id="telephone" name="telephone" placeholder="Telephone number without international code" />
+                                <input type="tel" id="telephone" name="telephone" placeholder="" />
                                 <div class="error-text">Error message</div>
                             </div>
                         </div>
                         <div class="form_fields">
                             <label for="mobile">Mobile Phone</label>
                             <div class="form_input">
-                                <input type="tel" id="mobile" name="mobile" placeholder="Mobile number without international code" />
+                                <input type="tel" id="mobile" name="mobile" placeholder="" />
+                                <div class="error-text">Error message</div>
+                            </div>
+                        </div>
+                        <div class="form_fields">
+                            <label for="mobile">Email</label>
+                            <div class="form_input">
+                                <input type="email" id="email" name="email" placeholder="Email" />
                                 <div class="error-text">Error message</div>
                             </div>
                         </div>
@@ -164,7 +171,9 @@
                         
                             <span id="mobileSig"></span>
                         
-                            <span id="linkedInSig" style="color: #033c57; text-decoration: none"></span>
+                            <span id="emailSig" class="link"></span>
+                        
+                            <span id="linkedInSig" class="link"></span>
                         </p>
                     </div>
                     <br/>
@@ -179,11 +188,9 @@
                         </p>
 
                         <p>
-                            <span id="companyWebsiteSig" style="color: #033c57; text-decoration: none;">
-                            </span>
+                            <span id="companyWebsiteSig" class="link"></span>
                             <br/>
-                            <span id="companyLinkedinSig" style="color: #033c57; text-decoration: none;">
-                            </span>
+                            <span id="companyLinkedinSig" class="link"></span>
                         </p>
                     </div>
 
@@ -192,12 +199,14 @@
                 <div class="button-container">
                     <button id="btn" class="btn" data-clipboard-text="">Copy signature</button>
                     <p class="notice">For any issues, please contact the support desk at <a href="mailto:IT-Support@BetaNXT.com" style="font-weight: bold;">IT-Support@BetaNXT.com</a></p>
+                    <br/>
+                    <p>BetaNXT Signature Tool v1.0</p>
                 </div>
             </div>
         </div>
         <script src="lib/clipboard.min.js"></script>
-        <!-- <script src="lib/phone/js/intlTelInput.min.js"></script> -->
-        <!-- <script class="iti-load-utils" async="" src="lib/phone/js/utils.js"></script> -->
+        <script src="lib/phone/js/intlTelInput.min.js"></script>
+        <script class="iti-load-utils" async="" src="lib/phone/js/utils.js"></script>
         <script src="data/data.js"></script>
         <script src="js/script.js"></script>
     </body>

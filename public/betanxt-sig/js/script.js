@@ -9,6 +9,7 @@ const officeLocationForm = document.getElementById('officeLocation');
 const officeLocationOtherForm = document.getElementById('officeLocationOther');
 const telephoneForm = document.getElementById('telephone');
 const mobileForm = document.getElementById('mobile');
+const emailForm = document.getElementById('email');
 const linkedInForm = document.getElementById('linkedIn');
 const betanxtWeb = document.getElementById('betanxtWeb');
 const companyWebsiteForm = document.getElementById('companyWebsiteForm');
@@ -30,6 +31,7 @@ const inputArray = [
     departmentOtherForm,
     telephoneForm,
     mobileForm,
+    emailForm,
     linkedInForm,
     officeLocationForm,
     officeLocationOtherForm,
@@ -54,20 +56,40 @@ inputArray.forEach(input => {
                 case 'lastName':
                     return accumulator + inputObj[b] + '\n';
                 case 'departments':
-                    return (inputObj[b] !== '' && inputObj[b] !== 'Other' ? (accumulator + inputObj[b] + '\n') : accumulator);
+                    return (inputObj[b] !== '' && 
+                            inputObj[b] !== 'Other' && 
+                            inputObj[b] !== "Corporate (no department will be shown)"
+                                ? (accumulator + inputObj[b] + '\n\n')
+                                : accumulator + '\n');
                 case 'departmentsOther':
-                    return departmentForm.value === 'Other' ? (inputObj[b] !== '' ? (accumulator + inputObj[b] + '\n') : accumulator) : accumulator;
+                    return departmentForm.value === 'Other' 
+                        ? (inputObj[b] !== '' 
+                            ? (accumulator + inputObj[b] + '\n\n')
+                            : accumulator)
+                        : accumulator;
                 case 'telephone':
-                    return (inputObj[b] !== '' ? (accumulator + 'O: ' + inputObj[b] + '\n') : accumulator);
+                    const isValidWorkNumber = isValidNumber(itiPhone);
+                    const workCountryCode = getCountryCode(itiPhone);
+                    const workFormattedNumber = getFormattedNumber(itiPhone);
+                    const workNumber = isValidWorkNumber ? '+' + workCountryCode + ' ' + workFormattedNumber  + ' w \n' : '';
+                    return (inputObj[b] !== '' ? (accumulator + workNumber) : accumulator);
                 case 'mobile':
-                    return (inputObj[b] !== '' ? (accumulator + 'M: ' + inputObj[b] + '\n') : accumulator);
+                    const isValidMobileNumber = isValidNumber(itiMobilePhone);
+                    const mobileCountryCode = getCountryCode(itiMobilePhone);
+                    const mobileFormattedNumber = getFormattedNumber(itiMobilePhone);
+                    const mobileNumber = isValidMobileNumber ? '+' + mobileCountryCode + ' ' + mobileFormattedNumber  + ' m \n' : '';
+                    return (inputObj[b] !== '' ? (accumulator + mobileNumber) : accumulator);
                 case 'linkedIn':
-                    return (inputObj[b] !== '' ? (accumulator + inputObj[b] + '\n') : accumulator) + '\n';
+                    return (inputObj[b] !== '' ? (accumulator + inputObj[b].replace(/((http:\/\/)|(https:\/\/))/, '') + '\n') : accumulator) + '\n';
                 case 'officeLocation':
-                    const inputObjBCleaned = inputObj[b].split('\n').join('');
-                    return (inputObj[b] !== '' && inputObjBCleaned !== 'Other' ? (accumulator + inputObj[b] + '\n') : accumulator);
+                    const inputObjCleaned = inputObj[b].split('\n').join('');
+                    return (inputObj[b] !== '' && inputObjCleaned !== 'Other' && inputObj? (accumulator + inputObj[b] + '\n') : accumulator);
                 case 'officeLocationOther':
-                    return officeLocationForm.value.split('\n').join('') === 'Other' ? (inputObj[b] !== '' ? (accumulator + inputObj[b] + '\n') : accumulator) : accumulator;
+                    return officeLocationForm.value.split('\n').join('') === 'Other' 
+                        ? (inputObj[b] !== ''
+                            ? (accumulator + inputObj[b] + '\n')
+                            : accumulator)
+                        : accumulator;
                 default:
                     return (inputObj[b] !== '' ? (accumulator + inputObj[b] + '\n') : accumulator);
             }
@@ -95,6 +117,7 @@ const departmentSig = document.getElementById('departmentSig');
 const officeLocationSig = document.getElementById('officeLocationSig');
 const telephoneSig = document.getElementById('telephoneSig');
 const mobileSig = document.getElementById('mobileSig');
+const emailSig = document.getElementById('emailSig');
 const linkedInSig = document.getElementById('linkedInSig');
 
 //Show input error message
@@ -118,7 +141,9 @@ const inputArrayForChecks = [
     firstNameForm,
     lastNameForm,
     departmentForm,
-    officeLocationForm
+    officeLocationForm,
+    functionForm,
+    email
 ];
 //Check required fields
 const checkRequiredOnSubmit = function () {
@@ -140,7 +165,7 @@ const checkRequiredOnSubmit = function () {
         btn.classList.remove('disabled');
         clipboard = new ClipboardJS('.btn');
         clipboard.on('success', function(e) {
-            console.log(btn.dataset.clipboardText)
+            // console.log(btn.dataset.clipboardText);
             btn.innerHTML = 'Copied';
             setTimeout(function() {
                 updateBtnText(btn)
@@ -223,10 +248,12 @@ deptOptions.forEach(function(deptOption) {
 // handle department dropdown changes
 departmentForm.addEventListener('change', function () {
     if (departmentForm.value === 'Other') {
-        departmentSig.innerHTML = departmentOtherForm.value + '<br>';
+        departmentSig.innerHTML = departmentOtherForm.value + '<br><br>';
         inputArrayForChecks.push(departmentOtherForm);
+    } else if (departmentForm.value === "Corporate (no department will be shown)") {
+        departmentSig.innerHTML = "<br>";
     } else {
-        departmentSig.innerHTML = departmentForm.value + '<br>';
+        departmentSig.innerHTML = departmentForm.value + '<br><br>';
         inputArrayForChecks.filter(function(input) {
             input.id !== departmentOtherForm.id
         })
@@ -250,26 +277,46 @@ departmentsSelect.addEventListener('change', function(e) {
     }
 });
 
+function isValidNumber(phoneInstance) {
+    return phoneInstance.isValidNumber();
+}
+
+function getFormattedNumber(phoneInstance) {
+    return phoneInstance.getNumber((intlTelInputUtils.numberFormat.NATIONAL));
+}
+
+function getCountryCode(phoneInstance) {
+    return phoneInstance.getSelectedCountryData().dialCode;
+}
+
 telephoneForm.addEventListener('keyup', function () {
-    if (telephoneForm.value.length > 0) {
-        telephoneSig.innerHTML = 'O: ' + telephoneForm.value + '<br>';
+    const countryCode = getCountryCode(itiPhone);
+    if (isValidNumber(itiPhone)) {
+        telephoneSig.innerHTML = '+' + countryCode + ' ' + getFormattedNumber(itiPhone) + ' w<br>';
     } else {
         telephoneSig.innerHTML = '';
     }
-    // console.log(itiPhone.getNumber(telephoneForm.value));
-    // console.log(itiPhone);
 });
 
 mobileForm.addEventListener('keyup', function () {
-    if (mobileForm.value.length > 0) {
-        mobileSig.innerHTML = 'M: ' + mobileForm.value + '<br>';
+    const countryCode = getCountryCode(itiMobilePhone);
+    if (isValidNumber(itiMobilePhone)) {
+        mobileSig.innerHTML = '+' + countryCode + ' ' + getFormattedNumber(itiMobilePhone) + ' m<br>';
     } else {
         mobileSig.innerHTML = '';
     }
 });
 
+emailForm.addEventListener('keyup', function () {
+    if (emailForm.value.length > 0) {
+        emailSig.innerHTML = emailForm.value + '<br>';
+    } else {
+        emailSig.innerHTML = '';
+    }
+});
+
 linkedInForm.addEventListener('keyup', function () {
-    linkedInSig.innerHTML = linkedInForm.value !== '' ? linkedInForm.value : '';
+    linkedInSig.innerHTML = linkedInForm.value !== '' ? linkedInForm.value.replace(/((http:\/\/)|(https:\/\/))/, '') : '';
     // showSuccess(linkedinForm);
 });
 
@@ -322,21 +369,21 @@ locationsSelect.addEventListener('change', function(e) {
     }
 });
 
-
-
+// phone options
+const phoneOpts = {    
+  // any initialisation options go here
+  utilsScript: 'lib/phone/js/utils.js',
+  formatOnDisplay: false,
+  nationalMode: true,
+  separateDialCode: true,
+  autoHideDialCode: false,
+  autoPlaceholder: 'aggressive',
+  placeholderNumberType: 'FIXED_LINE',
+  preferredCountries: ['us','in','gb'],
+}
 
 // phone
-// let itiPhone = window.intlTelInput(telephoneForm, {
-//   // any initialisation options go here
-//   utilsScript: 'lib/phone/js/utils.js',
-//   formatOnDisplay: true,
-//   autoPlaceholder: 'polite',
-//   nationalMode: true,
-//   preferredCountries: ['us','in','gb'],
-// //   separateDialCode: true,
+let itiPhone = window.intlTelInput(telephoneForm, phoneOpts);
 
-// });
-// window.intlTelInput(mobileForm, {
-//     // any initialisation options go here
-// });
+let itiMobilePhone = window.intlTelInput(mobileForm, phoneOpts);
 

@@ -174,6 +174,10 @@ a {
     white-space: nowrap;
 }
 
+.link {
+    color: #033c57; text-decoration: none
+}
+
 /* Form */
 
 .form {
@@ -227,8 +231,8 @@ label {
     display: none !important;
 }
 
-.form_input input::placeholder {
-    font-size:1px;
+.form_input input:not(input[type='tel'])::placeholder {
+    font-size:0px;
     position:absolute;
     top:-20px;
 }
