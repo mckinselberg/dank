@@ -69,15 +69,15 @@ inputArray.forEach(input => {
                         : accumulator;
                 case 'telephone':
                     const isValidWorkNumber = isValidNumber(itiPhone);
-                    const workCountryCode = getCountryCode(itiPhone);
-                    const workFormattedNumber = getFormattedNumber(itiPhone);
-                    const workNumber = isValidWorkNumber ? '+' + workCountryCode + ' ' + workFormattedNumber  + ' w \n' : '';
+                    const workCountryData = getCountryData(itiPhone);
+                    const workFormattedNumber = getFormattedNumber(itiPhone, workCountryData);
+                    const workNumber = isValidWorkNumber ? workFormattedNumber  + ' w \n' : '';
                     return (inputObj[b] !== '' ? (accumulator + workNumber) : accumulator);
                 case 'mobile':
                     const isValidMobileNumber = isValidNumber(itiMobilePhone);
-                    const mobileCountryCode = getCountryCode(itiMobilePhone);
-                    const mobileFormattedNumber = getFormattedNumber(itiMobilePhone);
-                    const mobileNumber = isValidMobileNumber ? '+' + mobileCountryCode + ' ' + mobileFormattedNumber  + ' m \n' : '';
+                    const mobileCountryData = getCountryData(itiMobilePhone);
+                    const mobileFormattedNumber = getFormattedNumber(itiMobilePhone, mobileCountryData);
+                    const mobileNumber = isValidMobileNumber ? mobileFormattedNumber  + ' m \n' : '';
                     return (inputObj[b] !== '' ? (accumulator + mobileNumber) : accumulator);
                 case 'linkedIn':
                     return (inputObj[b] !== '' ? (accumulator + inputObj[b].replace(/((http:\/\/)|(https:\/\/))/, '') + '\n') : accumulator) + '\n';
@@ -165,7 +165,7 @@ const checkRequiredOnSubmit = function () {
         btn.classList.remove('disabled');
         clipboard = new ClipboardJS('.btn');
         clipboard.on('success', function(e) {
-            // console.log(btn.dataset.clipboardText);
+            console.log(btn.dataset.clipboardText);
             btn.innerHTML = 'Copied';
             setTimeout(function() {
                 updateBtnText(btn)
@@ -281,27 +281,27 @@ function isValidNumber(phoneInstance) {
     return phoneInstance.isValidNumber();
 }
 
-function getFormattedNumber(phoneInstance) {
-    return phoneInstance.getNumber((intlTelInputUtils.numberFormat.NATIONAL));
+function getFormattedNumber(phoneInstance, countryData) {
+    return (countryData.iso2 === 'us' ? '+' + countryData.dialCode + ' ' : '') + phoneInstance.getNumber((countryData.iso2 === 'us' ? intlTelInputUtils.numberFormat.NATIONAL : intlTelInputUtils.numberFormat.INTERNATIONAL));
 }
 
-function getCountryCode(phoneInstance) {
-    return phoneInstance.getSelectedCountryData().dialCode;
+function getCountryData(phoneInstance) {
+    return phoneInstance.getSelectedCountryData();
 }
 
 telephoneForm.addEventListener('keyup', function () {
-    const countryCode = getCountryCode(itiPhone);
+    const countryData = getCountryData(itiPhone);
     if (isValidNumber(itiPhone)) {
-        telephoneSig.innerHTML = '+' + countryCode + ' ' + getFormattedNumber(itiPhone) + ' w<br>';
+        telephoneSig.innerHTML = getFormattedNumber(itiPhone, countryData) + ' w<br>';
     } else {
         telephoneSig.innerHTML = '';
     }
 });
 
 mobileForm.addEventListener('keyup', function () {
-    const countryCode = getCountryCode(itiMobilePhone);
+    const countryData = getCountryData(itiMobilePhone);
     if (isValidNumber(itiMobilePhone)) {
-        mobileSig.innerHTML = '+' + countryCode + ' ' + getFormattedNumber(itiMobilePhone) + ' m<br>';
+        mobileSig.innerHTML = getFormattedNumber(itiMobilePhone, countryData) + ' m<br>';
     } else {
         mobileSig.innerHTML = '';
     }
