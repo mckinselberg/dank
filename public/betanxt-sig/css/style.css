@@ -237,6 +237,19 @@ label {
     top:-20px;
 }
 
+.form_input input.too-short {
+    border-color: red;
+    background-color: #ffeeee;
+}
+.form_input input.too-long {
+    border-color: red;
+    background-color: #ffeeee;
+}
+.form_input input.valid {
+    border-color: green;
+    background-color: #f2fff3;
+}
+
 .form_input select {
     display: block;
     padding: 12px;

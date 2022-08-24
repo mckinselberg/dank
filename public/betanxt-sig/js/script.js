@@ -137,7 +137,7 @@ function showSuccess(input) {
 let clipboard;
 
 
-const inputArrayForChecks = [
+let inputArrayForChecks = [
     firstNameForm,
     lastNameForm,
     departmentForm,
@@ -145,8 +145,9 @@ const inputArrayForChecks = [
     functionForm,
     email
 ];
-//Check required fields
-const checkRequiredOnSubmit = function () {
+
+//Check required fields on submit
+function checkRequiredOnSubmit() {
     let errors = [];
 
     inputArrayForChecks.forEach(function (input) {
@@ -173,15 +174,18 @@ const checkRequiredOnSubmit = function () {
             clipboard.destroy();
         });
     }
+    errors = [];
 };
 
-const checkRequiredOnChange = function () {
+//Check required on fields on change
+const checkRequiredOnChange = function() {
     let errors = [];
     inputArrayForChecks.forEach(function (input) {
-        
         //trim removes white space
         if (input.value.trim() === '') {
             errors.push('error');
+        } else {
+            showSuccess(input)
         }
 
         if (errors.length > 0) {
@@ -190,6 +194,7 @@ const checkRequiredOnChange = function () {
             btn.classList.remove('disabled');
         }
     });
+    errors = [];
 }
 
 btn.addEventListener('click', function() {
@@ -258,13 +263,13 @@ departmentForm.addEventListener('change', function () {
             input.id !== departmentOtherForm.id
         })
     }
-    showSuccess(departmentForm);
+    // showSuccess(departmentForm);
 });
 
 // handle department other changes
 departmentOtherForm.addEventListener('keyup', function () {
     departmentSig.innerHTML = departmentForm.value === 'Other' ? departmentOtherForm.value + '<br>' : '';
-    showSuccess(departmentForm);
+    // showSuccess(departmentForm);
 });
 
 // handle department other selection
@@ -289,21 +294,76 @@ function getCountryData(phoneInstance) {
     return phoneInstance.getSelectedCountryData();
 }
 
+const validationErrors = {
+    "IS_POSSIBLE": 0,
+    "INVALID_COUNTRY_CODE": 1,
+    "TOO_SHORT": 2,
+    "TOO_LONG": 3,
+    "IS_POSSIBLE_LOCAL_ONLY": 4,
+    "INVALID_LENGTH": 5,
+}
+
+function getValidationError(phoneInstance) {
+    return phoneInstance.getValidationError();
+}
+
 telephoneForm.addEventListener('keyup', function () {
     const countryData = getCountryData(itiPhone);
     if (isValidNumber(itiPhone)) {
+        telephoneForm.className = 'valid';
         telephoneSig.innerHTML = getFormattedNumber(itiPhone, countryData) + ' w<br>';
     } else {
-        telephoneSig.innerHTML = '';
+        let validationClass;
+        switch (getValidationError(itiPhone)) {
+            case 0:
+            case -99:
+            case 2:
+            case 4:
+                telephoneForm.className = '';
+                validationClass = 'too-short';
+                telephoneForm.classList.add(validationClass);
+                break;
+            case 3: 
+                telephoneForm.className = '';
+                validationClass = 'too-long';
+                telephoneForm.classList.add(validationClass);
+                break;
+            default:
+                validationClass = '';
+                telephoneForm.className = '';
+                break;
+        }
+        telephoneSig.innerHTML = telephoneForm.value + (telephoneForm.value.length > 0 ? ' w<br>' : '');
     }
 });
 
 mobileForm.addEventListener('keyup', function () {
     const countryData = getCountryData(itiMobilePhone);
     if (isValidNumber(itiMobilePhone)) {
+        mobileForm.className = 'valid';
         mobileSig.innerHTML = getFormattedNumber(itiMobilePhone, countryData) + ' m<br>';
     } else {
-        mobileSig.innerHTML = '';
+        let validationClass;
+        switch (getValidationError(itiMobilePhone)) {
+            case 0:
+            case -99:
+            case 2:
+            case 4:
+                mobileForm.className = '';
+                validationClass = 'too-short';
+                mobileForm.classList.add(validationClass);
+                break;
+            case 3: 
+                mobileForm.className = '';
+                validationClass = 'too-long';
+                mobileForm.classList.add(validationClass);
+                break;
+            default:
+                validationClass = '';
+                mobileForm.className = '';
+                break;
+        }
+        mobileSig.innerHTML = mobileForm.value + (mobileForm.value.length > 0 ? ' m<br>' : '');
     }
 });
 
@@ -339,23 +399,19 @@ officeLocationForm.addEventListener('change', function() {
         inputArrayForChecks.push(officeLocationOtherForm);
     } else {
         officeLocationSig.innerHTML = officeLocationForm.value.split('\n').join('<br/>');
-        inputArrayForChecks.filter(function(input) {
-            input.id !== officeLocationOtherForm.id;
-        });
-        checkRequiredOnChange();
+        inputArrayForChecks = inputArrayForChecks.map(function(input) {
+            if (input.id.toString() !== officeLocationOtherForm.id.toString()) {
+                return input;
+            }
+        }).filter(Boolean);
     }
-    showSuccess(officeLocationForm);
+    checkRequiredOnChange();
 });
 
 // handle location other changes
 officeLocationOtherForm.addEventListener('keyup', function() {
-    const cleanValue = officeLocationForm.value.replace('\n','');
-    if (cleanValue === 'Other') {
-        officeLocationSig.innerHTML = officeLocationOtherForm.value;
-    } else {
-        officeLocationSig.innerHTML = '';
-    }
-    showSuccess(officeLocationForm);
+    officeLocationSig.innerHTML = officeLocationOtherForm.value;
+    checkRequiredOnChange();
 });
 
 // handle location other selection
@@ -370,7 +426,7 @@ locationsSelect.addEventListener('change', function(e) {
 });
 
 // phone options
-const phoneOpts = {    
+const phoneOpts = { 
   // any initialisation options go here
   utilsScript: 'lib/phone/js/utils.js',
   formatOnDisplay: false,
