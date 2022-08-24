@@ -237,7 +237,8 @@ label {
     top:-20px;
 }
 
-.form_input input.too-short {
+.form_input input.too-short,
+.form_input input.email-error {
     border-color: red;
     background-color: #ffeeee;
 }
@@ -245,7 +246,8 @@ label {
     border-color: red;
     background-color: #ffeeee;
 }
-.form_input input.valid {
+.form_input input.valid,
+.form_input input.email-valid {
     border-color: green;
     background-color: #f2fff3;
 }

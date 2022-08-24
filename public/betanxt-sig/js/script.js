@@ -155,6 +155,8 @@ function checkRequiredOnSubmit() {
         if (input.value.trim() === '') {
             showError(input, `This field is required`);
             errors.push('error');
+        } else if (input.id === 'email') {
+            validateEmail(input.value);
         } else {
             showSuccess(input);
         }
@@ -184,6 +186,8 @@ const checkRequiredOnChange = function() {
         //trim removes white space
         if (input.value.trim() === '') {
             errors.push('error');
+        } else if (input.id === 'email') {
+            validateEmail(input.value);
         } else {
             showSuccess(input)
         }
@@ -367,7 +371,23 @@ mobileForm.addEventListener('keyup', function () {
     }
 });
 
-emailForm.addEventListener('keyup', function () {
+function validateEmail(email) {
+    const regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    // console.log(regex.test(email) ? true : false);
+    const emailValid = regex.test(email) ? true : false;
+    if (emailValid) {
+        emailForm.classList.add('email-valid');
+        emailForm.classList.remove('email-error');
+    } else {
+        emailForm.classList.add('email-error');
+        emailForm.classList.remove('email-valid');
+    }
+    return emailValid;
+}
+
+emailForm.addEventListener('keyup', function (e) {
+    checkRequiredOnChange();
+    validateEmail(e.target.value)
     if (emailForm.value.length > 0) {
         emailSig.innerHTML = emailForm.value + '<br>';
     } else {
