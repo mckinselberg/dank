@@ -1,4 +1,8 @@
 'use strict';
+//utility
+const makeArray = function (domNodes) {
+    return [].slice.apply(domNodes);
+}
 //Selectors for form
 const firstNameForm = document.getElementById('firstName');
 const lastNameForm = document.getElementById('lastName');
@@ -135,7 +139,6 @@ function showSuccess(input) {
 }
 
 let clipboard;
-
 
 let inputArrayForChecks = [
     firstNameForm,
@@ -295,8 +298,26 @@ function isValidNumber(phoneInstance) {
 }
 
 function getFormattedNumber(phoneInstance, countryData) {
-    return (countryData.iso2 === 'us' ? '+' + countryData.dialCode + ' ' : '') + phoneInstance.getNumber((countryData.iso2 === 'us' ? intlTelInputUtils.numberFormat.NATIONAL : intlTelInputUtils.numberFormat.INTERNATIONAL));
+
+    let formattedNumber;
+    const regex = /[\-]/g;
+    if (countryData.iso2 === 'us') {
+        formattedNumber = '+' + countryData.dialCode + ' ' + phoneInstance.getNumber(intlTelInputUtils.numberFormat.NATIONAL);
+    } else {
+        formattedNumber = phoneInstance.getNumber(intlTelInputUtils.numberFormat.RFC3966).replace(regex, ' ').replace('tel:','');
+    }
+    // const matched = phoneInstance.getNumber(intlTelInputUtils.numberFormat.RFC3966).match(regex);
+    return formattedNumber;
 }
+
+window.addEventListener('load', function() {
+    makeArray(document.querySelectorAll('.iti__country-list > li, .iti__selected-flag, .iti__country-name, .iti__country')).forEach(function(el) {
+        el.addEventListener('click', function() {
+            updatePhone();
+            updateMobile();
+        })
+    })
+})
 
 function getCountryData(phoneInstance) {
     return phoneInstance.getSelectedCountryData();
@@ -315,7 +336,7 @@ function getValidationError(phoneInstance) {
     return phoneInstance.getValidationError();
 }
 
-telephoneForm.addEventListener('keyup', function () {
+function updatePhone() {
     const countryData = getCountryData(itiPhone);
     if (isValidNumber(itiPhone)) {
         telephoneForm.className = 'valid';
@@ -343,9 +364,12 @@ telephoneForm.addEventListener('keyup', function () {
         }
         telephoneSig.innerHTML = telephoneForm.value + (telephoneForm.value.length > 0 ? ' w<br>' : '');
     }
+}
+telephoneForm.addEventListener('keyup', function () {
+    updatePhone();
 });
 
-mobileForm.addEventListener('keyup', function () {
+function updateMobile() {
     const countryData = getCountryData(itiMobilePhone);
     if (isValidNumber(itiMobilePhone)) {
         mobileForm.className = 'valid';
@@ -373,6 +397,9 @@ mobileForm.addEventListener('keyup', function () {
         }
         mobileSig.innerHTML = mobileForm.value + (mobileForm.value.length > 0 ? ' m<br>' : '');
     }
+}
+mobileForm.addEventListener('keyup', function () {
+    updateMobile();
 });
 
 function validateEmail(email) {
@@ -466,4 +493,3 @@ const phoneOpts = {
 let itiPhone = window.intlTelInput(telephoneForm, phoneOpts);
 
 let itiMobilePhone = window.intlTelInput(mobileForm, phoneOpts);
-
