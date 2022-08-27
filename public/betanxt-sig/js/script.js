@@ -48,57 +48,60 @@ let inputObj = {};
 // create input object
 inputArray.forEach(input => {
     inputObj[input.id] = input.value;
-    input.addEventListener('change', () => {
-        checkRequiredOnChange();
-        document.getElementById('companyWebsiteSig').innerHTML = betaNXTWebsite;
-        document.getElementById('companyLinkedinSig').innerHTML = betaNXTLinkedIn;
-        inputObj[input.id] = input.value;
-        const clipboardText = Object.keys(inputObj).reduce(function(accumulator, b) {
-            switch(b) {
-                case 'firstName':
-                    return accumulator + inputObj[b] + ' ';
-                case 'lastName':
-                    return accumulator + inputObj[b] + '\n';
-                case 'departments':
-                    return (inputObj[b] !== '' && 
-                            inputObj[b] !== 'Other' && 
-                            inputObj[b] !== "Corporate (no department will be shown)"
+    const events = ['change','input'];
+    events.forEach(function(event) {
+        input.addEventListener('change', () => {
+            checkRequiredOnChange();
+            document.getElementById('companyWebsiteSig').innerHTML = betaNXTWebsite;
+            document.getElementById('companyLinkedinSig').innerHTML = betaNXTLinkedIn;
+            inputObj[input.id] = input.value;
+            const clipboardText = Object.keys(inputObj).reduce(function(accumulator, b) {
+                switch(b) {
+                    case 'firstName':
+                        return accumulator + inputObj[b] + ' ';
+                    case 'lastName':
+                        return accumulator + inputObj[b] + '\n';
+                    case 'departments':
+                        return (inputObj[b] !== '' && 
+                                inputObj[b] !== 'Other' && 
+                                inputObj[b] !== "Corporate (no department will be shown)"
+                                    ? (accumulator + inputObj[b] + '\n\n')
+                                    : accumulator + '\n');
+                    case 'departmentsOther':
+                        return departmentForm.value === 'Other' 
+                            ? (inputObj[b] !== '' 
                                 ? (accumulator + inputObj[b] + '\n\n')
-                                : accumulator + '\n');
-                case 'departmentsOther':
-                    return departmentForm.value === 'Other' 
-                        ? (inputObj[b] !== '' 
-                            ? (accumulator + inputObj[b] + '\n\n')
-                            : accumulator)
-                        : accumulator;
-                case 'telephone':
-                    const isValidWorkNumber = isValidNumber(itiPhone);
-                    const workCountryData = getCountryData(itiPhone);
-                    const workFormattedNumber = getFormattedNumber(itiPhone, workCountryData);
-                    const workNumber = isValidWorkNumber ? workFormattedNumber  + ' w \n' : '';
-                    return (inputObj[b] !== '' ? (accumulator + workNumber) : accumulator);
-                case 'mobile':
-                    const isValidMobileNumber = isValidNumber(itiMobilePhone);
-                    const mobileCountryData = getCountryData(itiMobilePhone);
-                    const mobileFormattedNumber = getFormattedNumber(itiMobilePhone, mobileCountryData);
-                    const mobileNumber = isValidMobileNumber ? mobileFormattedNumber  + ' m \n' : '';
-                    return (inputObj[b] !== '' ? (accumulator + mobileNumber) : accumulator);
-                case 'linkedIn':
-                    return (inputObj[b] !== '' ? (accumulator + inputObj[b].replace(/((http:\/\/)|(https:\/\/))/, '') + '\n') : accumulator) + '\n';
-                case 'officeLocation':
-                    const inputObjCleaned = inputObj[b].split('\n').join('');
-                    return (inputObj[b] !== '' && inputObjCleaned !== 'Other' && inputObj? (accumulator + inputObj[b] + '\n') : accumulator);
-                case 'officeLocationOther':
-                    return officeLocationForm.value.split('\n').join('') === 'Other' 
-                        ? (inputObj[b] !== ''
-                            ? (accumulator + inputObj[b] + '\n')
-                            : accumulator)
-                        : accumulator;
-                default:
-                    return (inputObj[b] !== '' ? (accumulator + inputObj[b] + '\n') : accumulator);
-            }
-        }, '');
-        btn.dataset.clipboardText = clipboardText;
+                                : accumulator)
+                            : accumulator;
+                    case 'telephone':
+                        const isValidWorkNumber = isValidNumber(itiPhone);
+                        const workCountryData = getCountryData(itiPhone);
+                        const workFormattedNumber = getFormattedNumber(itiPhone, workCountryData);
+                        const workNumber = isValidWorkNumber ? workFormattedNumber  + ' w \n' : '';
+                        return (inputObj[b] !== '' ? (accumulator + workNumber) : accumulator);
+                    case 'mobile':
+                        const isValidMobileNumber = isValidNumber(itiMobilePhone);
+                        const mobileCountryData = getCountryData(itiMobilePhone);
+                        const mobileFormattedNumber = getFormattedNumber(itiMobilePhone, mobileCountryData);
+                        const mobileNumber = isValidMobileNumber ? mobileFormattedNumber  + ' m \n' : '';
+                        return (inputObj[b] !== '' ? (accumulator + mobileNumber) : accumulator);
+                    case 'linkedIn':
+                        return (inputObj[b] !== '' ? (accumulator + inputObj[b].replace(/((http:\/\/)|(https:\/\/))/, '') + '\n') : accumulator) + '\n';
+                    case 'officeLocation':
+                        const inputObjCleaned = inputObj[b].split('\n').join('');
+                        return (inputObj[b] !== '' && inputObjCleaned !== 'Other' && inputObj? (accumulator + inputObj[b] + '\n') : accumulator);
+                    case 'officeLocationOther':
+                        return officeLocationForm.value.split('\n').join('') === 'Other' 
+                            ? (inputObj[b] !== ''
+                                ? (accumulator + inputObj[b] + '\n')
+                                : accumulator)
+                            : accumulator;
+                    default:
+                        return (inputObj[b] !== '' ? (accumulator + inputObj[b] + '\n') : accumulator);
+                }
+            }, '');
+            btn.dataset.clipboardText = clipboardText;
+        });
     });
 });
 
