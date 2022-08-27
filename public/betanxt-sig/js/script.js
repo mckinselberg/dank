@@ -310,14 +310,29 @@ function getFormattedNumber(phoneInstance, countryData) {
     return formattedNumber;
 }
 
+// add mutation observer to phone dropdown after page load
 window.addEventListener('load', function() {
-    makeArray(document.querySelectorAll('.iti__country-list > li, .iti__selected-flag, .iti__country-name, .iti__country')).forEach(function(el) {
-        el.addEventListener('click', function() {
+    makeArray(document.querySelectorAll('.iti__selected-flag')).forEach(function(el) {
+        phoneDropdownObserver.observe(el, observerOptions);
+    });
+});
+
+// phone
+function phoneMutationCallback(mutationsList, observer) {
+    mutationsList.forEach(function(mutation) {
+        if (mutation.attributeName === 'aria-expanded' && mutation.oldValue === 'true') {
             updatePhone();
             updateMobile();
-        })
+        }
     })
-})
+}
+
+// mutation observer
+const phoneDropdownObserver = new MutationObserver(phoneMutationCallback);
+const observerOptions = {
+    attributes: true,
+    attributeOldValue: true,
+}
 
 function getCountryData(phoneInstance) {
     return phoneInstance.getSelectedCountryData();
@@ -338,7 +353,9 @@ function getValidationError(phoneInstance) {
 
 function updatePhone() {
     const countryData = getCountryData(itiPhone);
-    if (isValidNumber(itiPhone)) {
+    if (telephoneForm.value.length === 0) {
+        telephoneForm.className = '';
+    } else if (isValidNumber(itiPhone)) {
         telephoneForm.className = 'valid';
         telephoneSig.innerHTML = getFormattedNumber(itiPhone, countryData) + ' w<br>';
     } else {
@@ -365,13 +382,16 @@ function updatePhone() {
         telephoneSig.innerHTML = telephoneForm.value + (telephoneForm.value.length > 0 ? ' w<br>' : '');
     }
 }
+
 telephoneForm.addEventListener('keyup', function () {
     updatePhone();
 });
 
 function updateMobile() {
     const countryData = getCountryData(itiMobilePhone);
-    if (isValidNumber(itiMobilePhone)) {
+    if (mobileForm.value.length === 0) {
+        mobileForm.className = '';
+    } else if (isValidNumber(itiMobilePhone)) {
         mobileForm.className = 'valid';
         mobileSig.innerHTML = getFormattedNumber(itiMobilePhone, countryData) + ' m<br>';
     } else {
