@@ -45,12 +45,14 @@ const inputArray = [
 
 let inputObj = {};
 
+
+const events = ['change','input','keyup'];
+
 // create input object
 inputArray.forEach(input => {
     inputObj[input.id] = input.value;
-    const events = ['change','input'];
     events.forEach(function(event) {
-        input.addEventListener('change', () => {
+        input.addEventListener(event, () => {
             checkRequiredOnChange();
             document.getElementById('companyWebsiteSig').innerHTML = betaNXTWebsite;
             document.getElementById('companyLinkedinSig').innerHTML = betaNXTLinkedIn;
@@ -237,22 +239,30 @@ const formatPhone = function (numberInput) {
 };
 
 //Event listeners for live preview
-firstNameForm.addEventListener('keyup', function () {
-    fullNameGen();
-    checkRequiredOnChange();
-    showSuccess(firstNameForm);
+//first name eventListener
+events.forEach(function(event) {
+    firstNameForm.addEventListener(event, function () {
+        fullNameGen();
+        checkRequiredOnChange();
+        if (firstNameForm.value) {
+            showSuccess(firstNameForm);
+        }
+    });
+    lastNameForm.addEventListener(event, function () {
+        fullNameGen();
+        checkRequiredOnChange();
+        if (lastNameForm.value) {
+            showSuccess(lastNameForm);
+        }
+    });
+    
+    functionForm.addEventListener(event, function () {
+        functionSig.innerHTML = functionForm.value !== '' ? functionForm.value + '<br>' : '';
+        checkRequiredOnChange();
+    });
 });
 
-lastNameForm.addEventListener('keyup', function () {
-    fullNameGen();
-    checkRequiredOnChange();
-    showSuccess(lastNameForm);
-});
 
-functionForm.addEventListener('keyup', function () {
-    functionSig.innerHTML = functionForm.value !== '' ? functionForm.value + '<br>' : '';
-    checkRequiredOnChange();
-});
 
 // populate department dropdowns
 const departmentsSelect = document.getElementById('departments');
@@ -264,26 +274,29 @@ deptOptions.forEach(function(deptOption) {
     departmentsSelect.appendChild(opt);
 });
 
-// handle department dropdown changes
-departmentForm.addEventListener('change', function () {
-    if (departmentForm.value === 'Other') {
-        departmentSig.innerHTML = departmentOtherForm.value + '<br><br>';
-        inputArrayForChecks.push(departmentOtherForm);
-    } else if (departmentForm.value === "Corporate (no department will be shown)") {
-        departmentSig.innerHTML = "<br>";
-    } else {
-        departmentSig.innerHTML = departmentForm.value + '<br><br>';
-        inputArrayForChecks.filter(function(input) {
-            input.id !== departmentOtherForm.id
-        })
-    }
-    // showSuccess(departmentForm);
-});
 
-// handle department other changes
-departmentOtherForm.addEventListener('keyup', function () {
-    departmentSig.innerHTML = departmentForm.value === 'Other' ? departmentOtherForm.value + '<br>' : '';
-    // showSuccess(departmentForm);
+events.forEach(function(event) {
+    // handle department dropdown changes
+    departmentForm.addEventListener(event, function () {
+        if (departmentForm.value === 'Other') {
+            departmentSig.innerHTML = departmentOtherForm.value + '<br><br>';
+            inputArrayForChecks.push(departmentOtherForm);
+        } else if (departmentForm.value === "Corporate (no department will be shown)") {
+            departmentSig.innerHTML = "<br>";
+        } else {
+            departmentSig.innerHTML = departmentForm.value + '<br><br>';
+            inputArrayForChecks.filter(function(input) {
+                input.id !== departmentOtherForm.id
+            })
+        }
+        // showSuccess(departmentForm);
+    });
+
+    // handle department other changes
+    departmentOtherForm.addEventListener(event, function () {
+        departmentSig.innerHTML = departmentForm.value === 'Other' ? departmentOtherForm.value + '<br>' : '';
+        // showSuccess(departmentForm);
+    });
 });
 
 // handle department other selection
@@ -313,6 +326,12 @@ function getFormattedNumber(phoneInstance, countryData) {
     return formattedNumber;
 }
 
+// setup mutation observer
+const phoneDropdownObserver = new MutationObserver(phoneMutationCallback);
+const observerOptions = {
+    attributes: true,
+    attributeOldValue: true,
+}
 // add mutation observer to phone dropdown after page load
 window.addEventListener('load', function() {
     makeArray(document.querySelectorAll('.iti__selected-flag')).forEach(function(el) {
@@ -320,7 +339,7 @@ window.addEventListener('load', function() {
     });
 });
 
-// phone
+// phone/mobile
 function phoneMutationCallback(mutationsList, observer) {
     mutationsList.forEach(function(mutation) {
         if (mutation.attributeName === 'aria-expanded' && mutation.oldValue === 'true') {
@@ -328,13 +347,6 @@ function phoneMutationCallback(mutationsList, observer) {
             updateMobile();
         }
     })
-}
-
-// mutation observer
-const phoneDropdownObserver = new MutationObserver(phoneMutationCallback);
-const observerOptions = {
-    attributes: true,
-    attributeOldValue: true,
 }
 
 function getCountryData(phoneInstance) {
@@ -386,9 +398,12 @@ function updatePhone() {
     }
 }
 
-telephoneForm.addEventListener('keyup', function () {
-    updatePhone();
-});
+
+events.forEach(function(event) {
+    telephoneForm.addEventListener(event, function () {
+        updatePhone();
+    });
+})
 
 function updateMobile() {
     const countryData = getCountryData(itiMobilePhone);
@@ -421,8 +436,11 @@ function updateMobile() {
         mobileSig.innerHTML = mobileForm.value + (mobileForm.value.length > 0 ? ' m<br>' : '');
     }
 }
-mobileForm.addEventListener('keyup', function () {
-    updateMobile();
+
+events.forEach(function(event) {
+    mobileForm.addEventListener(event, function () {
+        updateMobile();
+    });
 });
 
 function validateEmail(email) {
@@ -438,19 +456,22 @@ function validateEmail(email) {
     return emailValid;
 }
 
-emailForm.addEventListener('keyup', function (e) {
-    validateEmail(e.target.value)
-    if (emailForm.value.length > 0) {
-        emailSig.innerHTML = emailForm.value + '<br>';
-    } else {
-        emailSig.innerHTML = '';
-    }
-    checkRequiredOnChange();
-});
 
-linkedInForm.addEventListener('keyup', function () {
-    linkedInSig.innerHTML = linkedInForm.value !== '' ? linkedInForm.value.replace(/((http:\/\/)|(https:\/\/))/, '') : '';
-    // showSuccess(linkedinForm);
+events.forEach(function(event) {
+    emailForm.addEventListener(event, function (e) {
+        validateEmail(e.target.value)
+        if (emailForm.value.length > 0) {
+            emailSig.innerHTML = emailForm.value + '<br>';
+        } else {
+            emailSig.innerHTML = '';
+        }
+        checkRequiredOnChange();
+    });
+
+    linkedInForm.addEventListener(event, function () {
+        linkedInSig.innerHTML = linkedInForm.value !== '' ? linkedInForm.value.replace(/((http:\/\/)|(https:\/\/))/, '') : '';
+        // showSuccess(linkedinForm);
+    });
 });
 
 // populate location dropdowns
@@ -465,38 +486,44 @@ locationOptions.forEach(function(locationOption) {
 });
 
 // handle office location dropdown changes
-officeLocationForm.addEventListener('change', function() {
-    const cleanValue = officeLocationForm.value.replace('\n','');
-    if (cleanValue === 'Other') {
-        officeLocationSig.innerHTML = officeLocationOtherForm.value;
-        inputArrayForChecks.push(officeLocationOtherForm);
-    } else {
-        officeLocationSig.innerHTML = officeLocationForm.value.split('\n').join('<br/>');
-        inputArrayForChecks = inputArrayForChecks.map(function(input) {
-            if (input.id.toString() !== officeLocationOtherForm.id.toString()) {
-                return input;
-            }
-        }).filter(Boolean);
-    }
-    checkRequiredOnChange();
+events.forEach(function(event) {
+    officeLocationForm.addEventListener(event, function() {
+        const cleanValue = officeLocationForm.value.replace('\n','');
+        if (cleanValue === 'Other') {
+            officeLocationSig.innerHTML = officeLocationOtherForm.value;
+            inputArrayForChecks.push(officeLocationOtherForm);
+        } else {
+            officeLocationSig.innerHTML = officeLocationForm.value.split('\n').join('<br/>');
+            inputArrayForChecks = inputArrayForChecks.map(function(input) {
+                if (input.id.toString() !== officeLocationOtherForm.id.toString()) {
+                    return input;
+                }
+            }).filter(Boolean);
+        }
+        checkRequiredOnChange();
+    });
 });
 
 // handle location other changes
-officeLocationOtherForm.addEventListener('keyup', function() {
-    officeLocationSig.innerHTML = officeLocationOtherForm.value;
-    checkRequiredOnChange();
+events.forEach(function(event) {
+    officeLocationOtherForm.addEventListener(event, function() {
+        officeLocationSig.innerHTML = officeLocationOtherForm.value;
+        checkRequiredOnChange();
+    });
 });
 
 // handle location other selection
 const locationOtherContainer = document.getElementById('officeLocationOtherContainer');
-locationsSelect.addEventListener('change', function(e) {
-    const cleanValue = e.target.value.replace('\n','');
-    if (cleanValue === 'Other') {
-        locationOtherContainer.classList.remove('hidden');
-    } else {
-        locationOtherContainer.classList.add('hidden');
-    }
-    checkRequiredOnChange();
+events.forEach(function(event) {
+    locationsSelect.addEventListener(event, function(e) {
+        const cleanValue = e.target.value.replace('\n','');
+        if (cleanValue === 'Other') {
+            locationOtherContainer.classList.remove('hidden');
+        } else {
+            locationOtherContainer.classList.add('hidden');
+        }
+        checkRequiredOnChange();
+    });
 });
 
 // phone options
