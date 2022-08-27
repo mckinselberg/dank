@@ -261,6 +261,8 @@ label {
     border-width: 1px;
     width: 100%;
     font-size: 1.2rem;
+    max-width: 100%;
+    overflow: hidden;
 }
 .form_input select option {
     font-size: 1rem;
