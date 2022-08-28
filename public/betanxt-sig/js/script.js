@@ -46,7 +46,7 @@ const inputArray = [
 let inputObj = {};
 
 
-const events = ['change','input','keyup'];
+const events = ['change','input','keyup','beforeinput'];
 
 // create input object
 inputArray.forEach(input => {
