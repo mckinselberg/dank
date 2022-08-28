@@ -370,6 +370,7 @@ function updatePhone() {
     const countryData = getCountryData(itiPhone);
     if (telephoneForm.value.length === 0) {
         telephoneForm.className = '';
+        telephoneSig.innerHTML = '';
     } else if (isValidNumber(itiPhone)) {
         telephoneForm.className = 'valid';
         telephoneSig.innerHTML = getFormattedNumber(itiPhone, countryData) + ' w<br>';
@@ -409,6 +410,7 @@ function updateMobile() {
     const countryData = getCountryData(itiMobilePhone);
     if (mobileForm.value.length === 0) {
         mobileForm.className = '';
+        mobileSig.innerHTML = '';
     } else if (isValidNumber(itiMobilePhone)) {
         mobileForm.className = 'valid';
         mobileSig.innerHTML = getFormattedNumber(itiMobilePhone, countryData) + ' m<br>';
