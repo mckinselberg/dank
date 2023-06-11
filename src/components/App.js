@@ -1,11 +1,8 @@
 import React from 'react';
-//import ReactDOM from 'react-dom';
 import {
   BrowserRouter,
-  StaticRouter,
   Switch,
   Route,
-  Link
 } from "react-router-dom";
 
 import '../index.css';

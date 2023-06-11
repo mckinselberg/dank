@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-// import Link from './Link.js';
+import Link from '../Link.js';
 import ReactGA from 'react-ga';
 import splashlogo from './img/splash_logo.png';
 
@@ -38,11 +38,12 @@ export default class App extends Component{
     // const _fontSize = '1.13em';
     return (
       <div className="App">
-        <div className={`splash`}>
+        <div className="splash">
           <img src={splashlogo} alt={`Dan Kinsley Web Developer Logo`}/>
-          <div className={`experience`} >
+          <div className="experience">
             {/* {this.addDecoration()} */}
             <h1>Software Engineer<br/>and<br/>Seasoned Full-Stack Developer</h1>
+            <Link name="github" url="https://github.com/mckinselberg"/>
             <p></p>
           </div>
         </div>

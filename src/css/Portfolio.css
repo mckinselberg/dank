@@ -31,6 +31,15 @@ body {
 .splash > * {
   align-items: center;
 }
+.splash a {
+  font-size: .8em;
+  color: #324c7e;
+  transition: 0.5s all;
+  text-decoration: none;
+}
+.splash a:hover {
+  text-shadow: 1px 1px 1px #324c7e;
+}
 
 @media screen and (min-width: 500px) {
   .splash {
