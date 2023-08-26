@@ -7,10 +7,10 @@ export default class AudioPlayer extends Component{
   constructor() {
     super();
     this.songs = [
-      {
-        name: 'drive w noah',
-        url: 'unpro/drive-w-noah.mp3'
-      },
+      // {
+      //   name: 'drive w noah',
+      //   url: 'unpro/drive-w-noah.mp3'
+      // },
       {
         name: 'reset',
         url: 'fx/reset.mp3'
